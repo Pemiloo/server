@@ -1,5 +1,117 @@
-.body{
+.container{
     margin: 0;
     padding: 0;
 }
 
+.card{
+    background-color: #fff;
+    height: 500px;
+    width: 850px;
+    box-shadow: 2px 2px 2px 2px gray;
+    margin: 80px auto;
+    position: sticky;
+    border-radius: 10px;
+
+}
+
+.card_body{
+    display: flex;
+    box-sizing: border-box;
+    height: 500px;
+}
+
+.card_info{
+    background-color: #5096D7;
+    height: 100%;
+    width: 35%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: 700;
+}
+
+.card_info .title{
+    font-size: 48px;
+}
+
+.card_info .desc{
+    margin-top: 112px;
+    font-size: 24px;
+    margin-left: 16px;
+}
+
+.card_info .desc b{
+    background-color: white;
+    color: #5096D7;
+    border-radius: 5px;
+}
+
+.card_form{
+    width: 65%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 6%;
+    margin-top: 30px;
+
+}
+
+.label {
+    font-weight: 700;
+    color: #5096D7;
+    font-size: 18px;
+}
+
+.input{
+    width: 100%;
+    border-radius: 5px;
+    background: #F0F0F0;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.checkbox{
+    margin-top: 45px;
+}
+
+.checkbox:checked{
+   background-color: #5096D7;
+}
+
+
+p .t_checkbox{
+    font-weight: 500;
+    font-size: 14px;
+    color: #909090;
+}
+
+.button{
+    width: 130px;
+    height: 40px;
+    background: #6EADE8;
+    box-shadow: 0px 0px 6px #f0f0f0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fafafa;
+}
+
+
+
+@media screen and (max-width: 600px){
+    .card{
+        width: 90%; 
+    }
+
+    .card_info{
+        display: none;
+    }
+
+    .card_form{
+        width: 100%;
+        border-radius: 10px;
+    }
+}

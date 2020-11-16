@@ -1,0 +1,164 @@
+.navbar{
+    position: fixed;
+
+}
+
+.container{
+    padding: 50px;
+    margin-top: 60px;
+    position: relative;
+    
+}
+
+.title{
+    font-size: 38px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+.card_body{
+    width: 410px;
+    height: 250px;
+    background: #F4F4F4;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin: 10px auto;
+   
+}
+
+.titleRoom{
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titleRoom:hover{
+    opacity: 0.8;
+}
+
+.titleBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+.imgRoom{
+    height: 30px;
+    margin-top: 15px;
+    cursor: pointer;
+    
+}
+
+.imgRoom:hover{
+    opacity: 0.5;
+}
+
+.candidateBox{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.candidateTitle{
+    color: #333333;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: -25px;
+}
+
+.candidateInfoTitle{
+    color: #333333;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: -10px;
+}
+
+.input{
+    width: 140px;
+    height: 35px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-left: 10px;
+  
+}
+
+.copy{
+    background-color: #6EADE8;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    line-height: 10px;;
+}
+
+.copy:hover{
+    opacity: 0.7 ;
+}
+
+.statusEXP{
+    font-weight: bold;
+    font-size: 18px;
+    color: #D75050;
+}
+
+.statusDraft{
+    font-weight: bold;
+    font-size: 18px;
+    color: #6EADE8;
+}
+
+.statusActive{
+    font-weight: bold;
+    font-size: 18px;
+    color: #7BD750;
+}
+
+.listCandidate li{
+    margin-left: 15px;
+   
+}
+
+.more{
+  float: right; 
+  background-color: #6EADE8;
+  color: #fff;
+  padding: 10px; 
+  border-radius: 10px;
+  width: 80px;
+  text-align: center;
+}
+
+.more:hover{
+    opacity: 0.6;
+}
+
+.cardNew{
+    display: flex;
+}
+
+.cardNew span{
+    margin: 80px auto;
+}
+
+.cardNew:hover{
+    opacity: 0.6;
+    border: 1px solid #6EADE8;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 580px){
+   .container{
+       width: 100%;
+   }
+}

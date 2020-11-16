@@ -58,6 +58,7 @@
 
 .imgRoom:hover{
     opacity: 0.5;
+    cursor: pointer;
 }
 
 .candidateBox{
@@ -103,6 +104,7 @@
 
 .copy:hover{
     opacity: 0.7 ;
+    cursor: pointer;
 }
 
 .statusEXP{
@@ -140,6 +142,7 @@
 
 .more:hover{
     opacity: 0.6;
+    cursor: pointer;
 }
 
 .cardNew{
@@ -154,6 +157,7 @@
     opacity: 0.6;
     border: 1px solid #6EADE8;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 

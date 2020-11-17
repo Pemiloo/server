@@ -105,7 +105,7 @@ p .t_checkbox{
     justify-content: center;
 }
 
-.btnLogin{
+.btnRegister{
     border: 2px solid #5096D7;
     color: #fff;
     padding: 5px;
@@ -118,11 +118,11 @@ p .t_checkbox{
     background: #5096D7;
     border: 1px solid #5096D7;
     box-sizing: border-box;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
-.btnRegister{
+.btnLogin{
     color: #5096D7;
     padding: 5px;
     text-align: center;
@@ -133,17 +133,17 @@ p .t_checkbox{
     height: 40px;
     border: 2px solid #5096D7;
     box-sizing: border-box;
-    
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
-.card_form .forgot{
-    font-weight: 500;
-    font-size: 14px;
-    margin-top: 50px;
-    color:  #909090;
+p .forgot{
+    font-weight: 300;
     
+}
+
+.fot{
+    color: red;
 }
 
 

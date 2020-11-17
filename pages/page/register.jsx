@@ -1,17 +1,17 @@
 import Head from 'next/head';
 import React from 'react';
-import style from '../../styles/page/login.module.css';
+import style from '../../styles/page/register.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Login = () => {
+const Register = () => {
 
     // const router = useRouter();
 
     return(
         <div className={style.container}>
             <Head>
-                <title>Pemilo - Login Page</title>
+                <title>Pemilo - Register Page</title>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" href="/pemilo.svg" />
@@ -41,11 +41,9 @@ const Login = () => {
                         <p className={style.label}>Your Password</p>
                         <input type="password" name="password" id="password" className={style.input} placeholder="Enter your password" autoComplete="off" required="true" />
 
-                        <div className={style.forgot}>
-                            <Link className={style.forgot} href="/page/login">Forgot your password?</Link>
-                        </div>
+                        <p><input type="checkbox" name="check" id="check" className={style.checkbox} required="true" /> <span className={style.t_checkbox}>I am certify that email still active </span> </p>
 
-                        <p><input type="submit" name="register" id="register" value="Login" className={style.button}/></p>
+                        <p><input type="submit" name="register" id="register" value="Register" className={style.button}/></p>
                     </form>
                 </div>
             </div>
@@ -57,4 +55,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default Register;

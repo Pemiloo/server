@@ -6,17 +6,15 @@ import st from '../../../styles/page/admin/list-room.module.css';
 const listRoom = () => {
     return(
         <div>
+
+            <Nav></Nav>
+
             <Head>
                 <title>Pemilo - List Room</title>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" href="/pemilo.svg" />
             </Head>
-
-            <div className={st.navbar}>
-                <Nav />
-            </div>
-
             <div className={st.container}>
                <p className={st.title}>Room List</p>
 

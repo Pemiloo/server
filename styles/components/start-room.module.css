@@ -1,0 +1,147 @@
+.card{
+    position: relative;
+    width: 800px;
+    height: 500px;
+    background: #FAFAFA;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: 80px auto;
+    padding: 50px;
+}
+
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card img:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.titleRoom{
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.cardBody{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.containerField label{
+    font-weight: bold;
+    font-size: 24px;
+
+}
+
+.containerField{
+    width: 50%;
+}
+
+
+.input{
+    width: 300px;
+    height: 35px;
+    color: #909090;
+    background: #F0F0F0;
+    border: 1px solid #909090;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.textarea{
+    width: 300px;
+    color: #909090;
+    background: #F0F0F0;
+    border: 1px solid #909090;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.containerField p{
+    font-weight: 200;
+    font-size: 14px;
+
+}
+
+.containerField .btnNext{
+    width: 105px;
+    background-color: #6EADE8;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-sizing: border-box;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-left: 600px;
+    position: sticky;
+   
+}
+
+.btnNext:hover{
+    opacity: 0.6;
+}
+
+.optional{
+    font-weight: 500;
+    font-size: 14px;
+    color: #909090;
+    margin-left: 5px;
+}
+
+
+.column2{
+    margin-top: 45px;
+}
+
+.alertDanger{
+    color: #D75050;
+    text-decoration-line: underline;
+}
+
+
+.icon{
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+.containerFlex{
+    display: flex;
+}
+
+
+
+
+@media screen and (max-width: 580px){
+    .card{
+        width: 90%;
+        height: auto;
+    }
+
+    .containerField{
+        width: 100%;
+    }
+
+    .containerField .btnNext{
+        margin-left: 200px;
+        
+    }
+
+    .containerFlex ul li{
+        margin-right: 150px;
+    }
+
+    .column{
+        margin-top: 20px;
+    }
+
+    .column2{
+        margin-top: 20px;
+    }
+ }

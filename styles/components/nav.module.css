@@ -64,6 +64,10 @@
 .profile > img:hover {
   box-shadow: 0 0 0 1.5pt #5096D7;
 }
-@media screen and (max-width : 1140px){
-
+@media screen and (max-width : 760px){
+  .container{height: 65px; padding: 0px 15px;}
+  .logo > img {height: 30px;}
+  .profile > img{ width: 45px; height: 45px;}
+  .profile > span{ display: none;}
+  .menuList{padding: 0px 10px;}
 }

@@ -75,6 +75,13 @@
     color: #909090;
 }
 
+.input:focus{
+    border: 2px solid #5096D7;
+    background-color: #fff;
+}
+
+
+
 .checkbox{
     margin-top: 45px;
 }
@@ -133,9 +140,17 @@ p .t_checkbox{
     height: 40px;
     border: 2px solid #5096D7;
     box-sizing: border-box;
-    
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+}
+
+.btnRegister:hover{
+    opacity: 0.6;
+}
+
+.button:hover{
+    cursor: pointer;
+    opacity: 0.6;
 }
 
 .card_form .forgot{

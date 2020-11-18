@@ -21,7 +21,7 @@
 
 .titleRoom{
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .cardBody{
@@ -34,7 +34,11 @@
 .containerField label{
     font-weight: bold;
     font-size: 24px;
-    color: #909090;
+
+}
+
+.containerField{
+    width: 50%;
 }
 
 
@@ -48,15 +52,6 @@
     border-radius: 5px;
     padding-left: 10px;
 }
-
-.input:focus{
-   border: 2px solid  #6EADE8;
-}
-
-.textarea:focus{
-    border: 2px solid  #6EADE8;
-}
-
 
 .textarea{
     width: 300px;
@@ -85,6 +80,7 @@
     font-weight: 700;
     margin-top: 20px;
     margin-left: 600px;
+    position: sticky;
    
 }
 
@@ -92,13 +88,60 @@
     opacity: 0.6;
 }
 
+.optional{
+    font-weight: 500;
+    font-size: 14px;
+    color: #909090;
+    margin-left: 5px;
+}
+
+
+.column2{
+    margin-top: 45px;
+}
+
+.alertDanger{
+    color: #D75050;
+    text-decoration-line: underline;
+}
+
+
+.icon{
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+.containerFlex{
+    display: flex;
+}
+
+
+
+
 @media screen and (max-width: 580px){
     .card{
         width: 90%;
-        height: 750px;
+        height: auto;
+    }
+
+    .containerField{
+        width: 100%;
     }
 
     .containerField .btnNext{
         margin-left: 200px;
+        
+    }
+
+    .containerFlex ul li{
+        margin-right: 150px;
+    }
+
+    .column{
+        margin-top: 20px;
+    }
+
+    .column2{
+        margin-top: 20px;
     }
  }

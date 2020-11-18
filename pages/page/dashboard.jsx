@@ -16,6 +16,8 @@ const Dashboard = () => {
         <main className={s.row}>
           
           <div className={`${s.column} ${s.info}`}>
+
+          {`information account 4 square`}
             <div className={s.flex}>
 
               <div className={s.col}>
@@ -50,11 +52,13 @@ const Dashboard = () => {
                 </div>
               </div>
             
-            </div>
-            
+            </div> 
+          
+          {`graph room while running`}
             <div className={s.graphRoom}>
               {/* split code graph */}
             </div>
+          
           </div>
           
           <div className={`${s.column} ${s.detailRoom}`}>
@@ -65,10 +69,11 @@ const Dashboard = () => {
             
             <div className={`${s.column} ${s.detail}`}>
 
+            {`room title and description`}
               <div className={`${s.column} ${s.room}`}>
                 <div className={s.row}>
                   <div className={s.headtxt}>
-                    <span>Example Room Title for detail Room</span>
+                    <span>Example Room Title for detail Room test long text</span>
                   </div>
                 </div>
 
@@ -79,6 +84,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
+            {`candidate and position`}
               <div className={`${s.column} ${s.candidates}`}>
                 <div className={s.flex}>
                   <div className={s.subheadtxt}>
@@ -120,10 +126,20 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
+                  <div className={s.candidate}>
+                    <div className={s.row}>
+                      <img src="/logo.svg" alt="candidate"/>
+                      <div className={s.column}>
+                        <span className={s.txt}>Candidate Name</span>
+                        <span className={s.txt}>1000 vote</span>
+                      </div>
+                    </div>
+                  </div>
                 
                 </div>
               </div>
 
+            {`status room start till end`}
               <div className={`${s.column} ${s.status}`}>
                 <div className={s.row}>
                   <div className={`${s.column}`}>                    
@@ -151,6 +167,23 @@ const Dashboard = () => {
 
             <div className={s.column}>
 
+            {`Recent or latest room`}
+              <div className={`${s.column} ${s.room}`}>
+                <div className={s.row}>
+                  <div className={s.headtxt}>
+                    <span>Example Room Title for detail Room</span>
+                  </div>
+                </div>
+                <div className={s.row}>
+                  <span className={s.txt}> 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </span>
+                </div>
+                <div className={s.row}>
+                  <button type="submit" className={`${s.expand} ${s.subheadtxt}`}>more</button>
+                </div>
+              </div>
+
               <div className={`${s.column} ${s.room}`}>
                 <div className={s.row}>
                   <div className={s.headtxt}>
@@ -186,6 +219,7 @@ const Dashboard = () => {
             </div>
 
           </div>
+        
         </main>
 
       </div>

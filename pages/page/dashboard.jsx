@@ -17,7 +17,7 @@ const Dashboard = () => {
           
           <div className={`${s.column} ${s.info}`}>
 
-          {`information account 4 square`}
+          {/* {`information account 4 square`} */}
             <div className={s.flex}>
 
               <div className={s.col}>
@@ -54,7 +54,7 @@ const Dashboard = () => {
             
             </div> 
           
-          {`graph room while running`}
+          {/* {`graph room while running`} */}
             <div className={s.graphRoom}>
               {/* split code graph */}
             </div>
@@ -69,7 +69,7 @@ const Dashboard = () => {
             
             <div className={`${s.column} ${s.detail}`}>
 
-            {`room title and description`}
+            {/* {`room title and description`} */}
               <div className={`${s.column} ${s.room}`}>
                 <div className={s.row}>
                   <div className={s.headtxt}>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-            {`candidate and position`}
+            {/* {`candidate and position`} */}
               <div className={`${s.column} ${s.candidates}`}>
                 <div className={s.flex}>
                   <div className={s.subheadtxt}>
@@ -139,7 +139,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-            {`status room start till end`}
+            {/* {`status room start till end`} */}
               <div className={`${s.column} ${s.status}`}>
                 <div className={s.row}>
                   <div className={`${s.column}`}>                    
@@ -167,7 +167,7 @@ const Dashboard = () => {
 
             <div className={s.column}>
 
-            {`Recent or latest room`}
+            {/* {`Recent or latest room`} */}
               <div className={`${s.column} ${s.room}`}>
                 <div className={s.row}>
                   <div className={s.headtxt}>

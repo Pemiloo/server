@@ -54,6 +54,7 @@
 .txt{
   font-size: medium;
   color: #333333;
+  font-weight: 500;
   overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;

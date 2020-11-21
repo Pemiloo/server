@@ -13,8 +13,31 @@ const detailRoom = () => {
             <div className={s.column}>
 
               <div className={`${s.column} ${s.candidate} ${s.card}`}>
-                <div className={s.row}>
+                <div className={s.column}>
                   <span className={s.headtxt}>Position</span>
+                  <select name="positionSelect" className={`${s.select} ${s.txt}`}>
+                    <option value="placeholder" selected disabled hidden>Position...</option>
+                    <option value="position2">Ketua Osis</option>
+                    <option value="position3">Unknown</option>
+                    <option value="position4">Wakil Ketua Osis</option>
+                  </select>
+                </div>
+
+                <div className={s.column}>
+                  <span className={s.headtxt}>Candidate</span>
+
+                  <div className={s.select}>
+                    <span>Candidate 1</span>
+                  </div>
+                  <div className={s.select}>
+                    <span>Candidate 2</span>
+                  </div>
+                  <div className={s.select}>
+                    <span>Candidate 3</span>
+                  </div>
+                  <div className={s.select}>
+                    <span>Candidate 4</span>
+                  </div>
                 </div>
               </div>
 
@@ -45,13 +68,13 @@ const detailRoom = () => {
               <div className={s.row}>
                 <div className={s.flex}>
                   
-                  <div className={`${s.column} ${s.candidateClass} ${s.center}`}>
-                    <span>Class</span>
-                    <span>{`XIII RPL 3`}</span>
+                  <div className={`${s.column} ${s.candidatebio} ${s.center}`}>
+                    <span className={s.headtxt}>Class</span>
+                    <span className={s.subheadtxt}>{`XIII RPL 3`}</span>
                   </div>
-                  <div className={`${s.column} ${s.candidatePosition} ${s.center}`}>
-                    <span>Position</span>
-                    <span>{`Wakil Ketua`}</span>
+                  <div className={`${s.column} ${s.candidatebio} ${s.center}`}>
+                    <span className={s.headtxt}>Position</span>
+                    <span className={s.subheadtxt}>{`Wakil Ketua`}</span>
                   </div>
 
                 </div>
@@ -59,24 +82,24 @@ const detailRoom = () => {
 
               <div className={`${s.row} ${s.candidateVision}`}>
                 <div className={s.column}>
-                  <span>Visions</span>
-                  <span>{`example vision`}</span>
+                  <span className={s.headtxt}>Visions</span>
+                  <span className={s.txt}>{`example vision`}</span>
                 </div>
               </div>
 
               <div className={`${s.row} ${s.candidateMission}`}>
                 <div className={s.column}>
-                  <span>Missions</span>
-                  <span>{`example mission`}</span>
+                  <span className={s.headtxt}>Missions</span>
+                  <span className={s.txt}>{`example mission`}</span>
                 </div>
               </div>
 
-              <div className={`${s.row} ${s.candidateVotes} ${s.center}`}>
-                <span>Has</span>
-                <span>{`1200`}</span>
-                <span>votes from</span>
-                <span>{`3000`}</span>
-                <span>voter</span>
+              <div className={`${s.row} ${s.candidateVotes} ${s.center} ${s.headtxt}`}>
+                <span>Has
+                <span className={s.votes}>{` 1200 `}</span>
+                votes from
+                <span className={s.votes}>{` 3000 `}</span>
+                voter</span>
               </div>
 
             </div>

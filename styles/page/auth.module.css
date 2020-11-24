@@ -1,0 +1,69 @@
+.containerFluid{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center; align-items: center;
+  padding: 0px 20px;
+}
+.container{
+  max-width: 760px;
+  max-height: 550px;
+  width: 100%; height: 100%;
+  position: relative;
+}
+.sideCard{
+  max-width: 260px;
+  max-height: 510px;
+  width: 100%; height: 100%;
+  background: #6EADE8;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  display: block;
+  position: absolute;
+  z-index: 2;
+  left: 0px; top: 20px;
+  padding: 20px;
+  cursor: default;
+}
+.sideCard > .headTxt {
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 48px;
+  color: #FFFFFF;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.sideCard > .txt {
+  margin-top: 80px;
+  max-width: 200px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.Sptxt{
+  font-weight: 700;
+  color: #6EADE8;
+  background-color: #FFFFFF;
+  border-radius: 6px; padding: 0 4px;
+}
+
+.formCard{
+  max-width: 500px;
+  max-height: 500px;
+  width: 100%; height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 25px; right: 0px;
+  background: #FAFAFA;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  border-radius: 0px 8px 8px 0px;
+  padding: 35px;
+}
+
+@media screen and (max-width: 800px) {
+  .sideCard{display: none;}
+  .formCard{
+    border-radius: 8px; 
+    right: auto; top: auto; margin:auto;
+    position: relative;
+  }
+}

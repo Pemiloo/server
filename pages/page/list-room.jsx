@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from '../../components/nav';
-import st from '../../../styles/page/admin/list-room.module.css';
+import Nav from '../components/nav';
+import st from '../../styles/page/list-room.module.css';
 
 const listRoom = () => {
     return(

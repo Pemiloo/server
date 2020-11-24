@@ -9,7 +9,7 @@ export {get,set,del,delAll};
 export {State,Dispatch};
 export {en, de};
 
-export const Action = Action;
-export const Http = Http;
+export {Action};
+export {Http};
 
 

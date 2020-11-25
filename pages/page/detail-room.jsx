@@ -1,9 +1,16 @@
 import s from '../../styles/page/detail-room.module.css'
 import Nav from '../components/nav'
+import Head from 'next/head'
 
 const detailRoom = () => {
   return(
-    <>
+    <html lang="en"> 
+      <Head>
+        <title>Pemilo - Detail Room</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/pemilo.svg" />
+      </Head>
       <Nav></Nav>
       <div className={s.containerFluid}>
 
@@ -108,7 +115,7 @@ const detailRoom = () => {
         </div>
 
       </div>
-    </>
+    </html>
   )
 }
 

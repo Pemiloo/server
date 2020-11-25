@@ -95,7 +95,8 @@
   min-height: 450px;
   margin-top: 20px;
   border-radius: 8px;
-  background-color: salmon;
+  display: flex;
+  align-items: flex-end;
 }
 
 

@@ -1,6 +1,7 @@
 import Nav from '../components/nav';
 import s from '../../styles/page/dashboard.module.css'
 import { Line } from 'react-chartjs-2';
+import Head from 'next/head';
 
 const generateData = () => {
   return Math.round(Math.random() * 100);
@@ -82,7 +83,13 @@ const Dashboard = () => {
   };
 
   return(
-    <>
+    <html lang="en"> 
+      <Head>
+        <title>Pemilo - Dashboard</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/pemilo.svg" />
+      </Head>
       <Nav></Nav>
       <div className={s.containerFluid}>
 
@@ -303,7 +310,7 @@ const Dashboard = () => {
         </main>
 
       </div>
-    </>
+    </html>
   )
 }
 export default Dashboard

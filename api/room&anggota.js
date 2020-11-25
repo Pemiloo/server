@@ -13,3 +13,31 @@ export async function createRoom(emailAdmin = "", name = "", desc = "", member =
   }else return false;   
 }
 
+export async function getCountAnggota(room = ""){
+  const res = await httpA.post('/countAnggota', {codeRoom:room});
+  return res.count;
+}
+
+export async function getCountRoom(email = ""){
+  const res =  await httpR.post('/countRoom', {emailAdmin: email});  
+  return res.count;
+}
+
+export async function getCountRoomSta(email = "", sta = true){
+  const res = await httpR.post('/countRoomSta', {emailAdmin: email, sta});
+  return res.count;
+}
+
+export async function getListRoom(email = ""){
+  return await httpR.post('/findAll', {param : {emailAdmin:email}});
+}
+
+export async function updateRoom(room = "", update = new Object()){
+  const res = await httpR.put('/update', {find:{codeRoom:room}, field:update});
+  return (res.res === true) ? true : false;
+}
+
+
+
+
+

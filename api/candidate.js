@@ -8,5 +8,5 @@ export async function getListCandidate(room = ""){
 
 export async function addCandidate(room = "", name = "", photo = "", visi = "", misi = new Array(), position = "", kelas = ""){
   const res = await http.post('/Candidate', {codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position, classroom:kelas});
-  //Masih error
+  return (res.status === 'ok') ? true : false;
 }

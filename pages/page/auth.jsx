@@ -1,4 +1,6 @@
 import s from '../../styles/page/auth.module.css'
+import Register from '../components/auth/register'
+import Login from '../components/auth/login'
 
 const Auth = () => {
   return(
@@ -14,7 +16,18 @@ const Auth = () => {
           </div>
         </div>
         <div className={s.formCard}>
-          <div><p>a</p></div>
+
+          <div className={s.switchBtn}>
+            <div className={`${s.half} ${s.register}`}>
+              <span>REGISTER</span>
+            </div>
+            <div className={`${s.half} ${s.login}`}>
+              <span>LOGIN</span>
+            </div>
+          </div>
+          {/* <Register></Register> */}
+          <Login></Login>
+
         </div>
       </div>
     </div>

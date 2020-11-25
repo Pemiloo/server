@@ -1,7 +1,86 @@
 import Nav from '../components/nav';
 import s from '../../styles/page/dashboard.module.css'
+import { Line } from 'react-chartjs-2';
+
+const generateData = () => {
+  return Math.round(Math.random() * 100);
+}
 
 const Dashboard = () => {
+  const data = {
+    labels: [['June', '2015'], 'July', 'August', 'September', 'October', 'November', 'December', ['January', '2016'], 'February', 'March', 'April', 'May'],
+    datasets: [
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.3,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: [
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+            generateData(),
+        ]
+      },
+      {
+        label: 'My Second dataset',
+        fill: false,
+        lineTension: 0.3,
+        backgroundColor: 'rgb(192,75,186)',
+        borderColor: 'rgb(171,75,192)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgb(180,75,192)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: [
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+        ]
+      }
+    ]
+  };
+
   return(
     <>
       <Nav></Nav>
@@ -14,7 +93,7 @@ const Dashboard = () => {
         </div>
 
         <main className={s.row}>
-          
+
           <div className={`${s.column} ${s.info}`}>
 
           {/* {`information account 4 square`} */}
@@ -35,7 +114,7 @@ const Dashboard = () => {
                   <span className={s.txt}>Room Total</span>
                 </div>
               </div>
-              
+
               <div className={s.col}>
                 <div className={s.column}>
                   <img src="/icon/Frame active.svg" alt="roomActive-icon"/>
@@ -43,7 +122,7 @@ const Dashboard = () => {
                   <span className={s.txt}>Room Active</span>
                 </div>
               </div>
-              
+
               <div className={s.col}>
                 <div className={s.column}>
                   <img src="/icon/Frame expire.svg" alt="roomExpire-icon"/>
@@ -51,22 +130,23 @@ const Dashboard = () => {
                   <span className={s.txt}>Room Expired</span>
                 </div>
               </div>
-            
-            </div> 
-          
+
+            </div>
+
           {/* {`graph room while running`} */}
             <div className={s.graphRoom}>
               {/* split code graph */}
+              <Line data={data} />
             </div>
-          
+
           </div>
-          
+
           <div className={`${s.column} ${s.detailRoom}`}>
 
             <div className={s.row}>
               <span className={s.headsection}>Detail Room</span>
             </div>
-            
+
             <div className={`${s.column} ${s.detail}`}>
 
             {/* {`room title and description`} */}
@@ -78,7 +158,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className={s.row}>
-                  <span className={s.txt}> 
+                  <span className={s.txt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   </span>
                 </div>
@@ -135,22 +215,22 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
-                
+
                 </div>
               </div>
 
             {/* {`status room start till end`} */}
               <div className={`${s.column} ${s.status}`}>
                 <div className={s.row}>
-                  <div className={`${s.column}`}>                    
-                    <span className={s.subheadtxt}>Start</span>                                        
-                    <span className={s.txt}>12 November 2020 07:39 AM</span>                    
+                  <div className={`${s.column}`}>
+                    <span className={s.subheadtxt}>Start</span>
+                    <span className={s.txt}>12 November 2020 07:39 AM</span>
                   </div>
                 </div>
                 <div className={s.row}>
-                  <div className={`${s.column}`}>                    
-                    <span className={s.subheadtxt}>End</span>                                        
-                    <span className={s.txt}>12 November 2020 05:30 PM</span>                    
+                  <div className={`${s.column}`}>
+                    <span className={s.subheadtxt}>End</span>
+                    <span className={s.txt}>12 November 2020 05:30 PM</span>
                   </div>
                 </div>
               </div>
@@ -158,9 +238,9 @@ const Dashboard = () => {
             </div>
 
           </div>
-          
+
           <div className={`${s.column} ${s.recentRoom}`}>
-            
+
             <div className={s.row}>
               <span className={s.headsection}>Recent Room</span>
             </div>
@@ -175,7 +255,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className={s.row}>
-                  <span className={s.txt}> 
+                  <span className={s.txt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   </span>
                 </div>
@@ -191,7 +271,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className={s.row}>
-                  <span className={s.txt}> 
+                  <span className={s.txt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   </span>
                 </div>
@@ -207,7 +287,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className={s.row}>
-                  <span className={s.txt}> 
+                  <span className={s.txt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   </span>
                 </div>
@@ -219,7 +299,7 @@ const Dashboard = () => {
             </div>
 
           </div>
-        
+
         </main>
 
       </div>

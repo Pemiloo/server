@@ -1,0 +1,40 @@
+.wrap .input{
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid #909090;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+}
+
+.label{font-weight: bold;font-size: 18px;color: #5096D7;}
+.wrap .input:focus{border: 2px solid #5096D7; box-sizing: border-box;border-radius: 5px;}
+.wrap .forgot{color: #5096D7;font-weight: bold;font-size: 14px;}
+.wrap .forgot:hover{cursor: pointer; opacity: 0.7;}
+
+
+.wrap .committe{margin-top: 30px;}
+.wrap .containerIcon{margin-top: 10px; display: flex; justify-content: center;}
+.wrap .btn{
+    background: #6EADE8;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: #F4F4F4;
+    padding: 10px;
+    width: 100px;
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.wrap .btn:hover{opacity: 0.6; cursor: pointer;}
+.wrap .containerIcon img:hover{opacity: 0.6; cursor: pointer;}
+
+@media screen and (max-width: 760px){
+    
+    .wrap{
+        margin-top: 10px;
+    }
+}

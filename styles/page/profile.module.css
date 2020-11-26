@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     margin: 150px auto;
+    padding: 0 30px;
 }
 
 .column1{
@@ -16,24 +17,25 @@
     border-radius: 8px 0px 0px 8px;
     width: 250px;
     height: 200px;
-   
-}
+    display: flex;
+    align-items: center;
+}.bg{width: 100%;}
 
 .column1 .txtCol{
     color: #333333;
     font-weight: 500;
     font-size: 20px;
-    margin-top: 25px;
+    padding: 12px 0;
     padding-left: 30px;
+    box-sizing: border-box;
 }
+p.txtCol{margin: 0;}
 
 .column1 .txtCol:hover{
     cursor: pointer;
     background: rgba(144, 144, 144, 0.1);
     box-shadow: inset 3px 0px 0px #5096D7;
-    height: 50px;
     box-sizing: border-box;
-    line-height: 50px;
     
 }
 
@@ -46,4 +48,26 @@
     padding: 30px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+@media screen and (max-width: 760px){
+    .containerFluid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 100px auto;
+        padding: 30px;
+    }
+
+    .column1{
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .column2{
+        margin-top: 10px;
+        width: 100%;
+        padding: 30px;
+        border-radius: 8px;
+    }
 }

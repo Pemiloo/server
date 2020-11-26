@@ -1,0 +1,47 @@
+.candidateImg > .imgThumb{
+    max-width: 125px; min-width: 125px;
+    max-height: 125px; min-height: 125px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 100%;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+
+.candidateImg .imgThumb:hover{cursor: pointer; border: 1px solid #5096D7;}
+.candidateImg .imgCam:hover{cursor: pointer; opacity: 0.7;}
+.candidateImg .imgCam{margin-top:  95px;margin-left: -40px;}
+.wrap{margin-top: 30px;}
+
+.wrap label{font-weight: bold;font-size: 18px;color: #5096D7;}
+.wrap .input{
+    margin-top: 10px;
+    width: 100%;
+    border: 1px solid #909090;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 40px;
+    padding-left: 10px;
+    outline: none;
+}
+.wrap .input:focus{border: 2px solid #5096D7; box-sizing: border-box;border-radius: 5px;}
+.wrap .committe{margin-top: 30px;}
+.wrap .containerIcon{margin-top: 10px; display: flex; justify-content: center;}
+.wrap .committe label{color: #5096D7;}
+.wrap .btn{
+    background: #6EADE8;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 8px;
+    color: #F4F4F4;
+    padding: 10px;
+    width: 100px;
+    margin-top: 70px;
+    font-weight: bold;
+    font-size: 18px;
+    outline: none;
+}
+
+.wrap .btn:hover{opacity: 0.6; cursor: pointer;}
+.wrap .containerIcon img:hover{opacity: 0.6; cursor: pointer;}
+

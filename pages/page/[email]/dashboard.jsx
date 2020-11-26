@@ -1,12 +1,12 @@
-import s from '../../styles/page/dashboard.module.css'
-import Nav from '../components/nav';
+import s from '../../../styles/page/dashboard.module.css'
+import Nav from '../../components/nav';
 import Head from 'next/head';
 import useSWR from 'swr';
 
 import { Line } from 'react-chartjs-2';
-import { getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../api';
+import { getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
 import { useEffect, useState } from 'react';
-import { get } from '../../lib';
+import { get } from '../../../lib';
 
 const generateData = () => {
   return Math.round(Math.random() * 100);
@@ -136,16 +136,23 @@ const bulkOperation = async (email = "", room = "") => {
   }
 }
 
-const Dashboard = () => {
+export async function getServerSideProps(context){
+
+  const { email } = context.params;
+
+  return{
+    props:{
+      parMail : email
+    }
+  }
+}
+
+const Dashboard = ({parMail}) => {
 
   const [room, setRoom] = useState("");  
-  const [mail, setMail] = useState("");  
+  const [mail, setMail] = useState(parMail);  
 
-  const [index, setIndex] = useState(0);
-
-  useEffect(()=>{
-    setMail(get("Auth"));
-  },[]);
+  const [index, setIndex] = useState(0);  
 
   const listRoom = useSWR(`/api/listRoom/${mail}`, ()=>{ return getListRoom(mail)});
 

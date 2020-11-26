@@ -11,3 +11,18 @@ export async function signinAdmin(email = "", password = ""){
   const res = await http.post('/signin', {email, password});  
   return res.success;
 }
+
+export async function getAdmin(email = ""){
+  const res = await http.post('/find', {email});
+  return res.message[0];
+}
+
+export async function updateAdminPass(email = "", pass = ""){
+  const res = await http.put('/update', {findEmail:email, password : pass});
+  return res.success;
+}
+
+export async function updateAdmin(email = "",panitia = [], photo = "", title = ""){
+  const res = await http.put('/update', {findEmail:email, namaPanitia : panitia, linkPhoto:photo, title});
+  return res.success;
+}

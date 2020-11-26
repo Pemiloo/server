@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import st from '../../styles/page/room-candidate.module.css';
-import Nav from '../components/nav';
+import Nav from '../../components/nav';
 
 
 const roomCandidate = () => {

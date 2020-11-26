@@ -28,7 +28,7 @@ const Login = () => {
         const res = await signinAdmin(mail, pass);            
         if(res){
           set("Auth", mail);
-          router.push('/page/dashboard');
+          router.push(`/page/${mail}/dashboard`);
         }
       } catch (error) {
         alert("Email atau Password tidak sesuai!");

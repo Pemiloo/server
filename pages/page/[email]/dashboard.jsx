@@ -7,6 +7,9 @@ import { Line } from 'react-chartjs-2';
 import { getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
 import { useEffect, useState } from 'react';
 import { get } from '../../../lib';
+import { Router, useRouter } from 'next/router';
+import EditRoom from '../../components/edit-room';
+import CreateRoom from '../../components/create-room';
 
 const generateData = () => {
   return Math.round(Math.random() * 100);
@@ -14,7 +17,7 @@ const generateData = () => {
 
 const CandidateSection = ({room, position = "Ketua"}) => {
 
-  const {data} = useSWR(`/api/CandidateSection/${position}`, ()=>{ return getCandidate(room, position) });
+  const {data} = useSWR(`/api/CandidateSection/${room}/${position}`, ()=>{ return getCandidate(room, position) });
 
   if(data != undefined){
     return(
@@ -22,7 +25,7 @@ const CandidateSection = ({room, position = "Ketua"}) => {
       {
         data.map((e,i)=>{
           return(
-            <div className={s.candidate}>
+            <div className={s.candidate} key={i}>
               <div className={s.row}>
                 <img src={e.photo} alt={"Photo"}/>
                 <div className={s.column}>
@@ -54,11 +57,17 @@ const EndSection = ({data}) => {
   );
 }
 
-const Desc = ({datRoom}) => {  
+const Desc = ({datRoom, email}) => {  
 
-  const [op, setOp] = useState('');
+  const router = useRouter();
+
+  const [op, setOp] = useState("Ketua");
 
   const { data } = useSWR('/api/option', ()=>{ return getOption('position') });
+
+  const atAddCandidate = () => {
+    router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
+  }
 
   return(
     <div className={`${s.column} ${s.detail}`}>  
@@ -96,11 +105,11 @@ const Desc = ({datRoom}) => {
         </div>
         <div className={`${s.row} ${s.wrap}`}>
           {/* Bagian untuk Candidate Section*/}
-          <CandidateSection room={datRoom.codeRoom} ></CandidateSection>
+          <CandidateSection room={datRoom.codeRoom} position={op}></CandidateSection>
         </div>
         <div className={`${s.row} ${s.wrap}`}>
 
-          <button className={`${s.txt} ${s.btnRoom}`}>add candidate</button>
+          <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>add candidate</button>
           <button className={`${s.txt} ${s.btnRoom}`}>edit room</button>
           <div className={`${s.txt} ${s.btnRoom}`}>                    
             <label> Room Code </label>
@@ -178,8 +187,9 @@ const Dashboard = ({parMail}) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="icon" href="/pemilo.svg" />
         </Head>
-        
-        <Nav></Nav>
+        <Nav email={parMail}></Nav>
+        {/* <CreateRoom></CreateRoom> */}
+        {/* <EditRoom></EditRoom> */}
         <div className={s.containerFluid}>
   
           <div className={s.row}>
@@ -243,7 +253,7 @@ const Dashboard = ({parMail}) => {
               </div>
 
               {
-                (listRoom.data[index] === undefined ) ? null : <Desc datRoom={listRoom.data[index]} ></Desc>
+                (listRoom.data[index] === undefined ) ? null : <Desc datRoom={listRoom.data[index]} email={parMail} ></Desc>
               }              
   
             </div>

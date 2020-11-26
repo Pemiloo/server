@@ -42,16 +42,16 @@ const ChangePass = ({email}) => {
               
               <label className={st.label}>New Password</label>
               <input onChange={(e)=>{setNewPass(e.target.value)}} value={newPass} type="text" name="new" id="new" placeholder="Enter new password" className={st.input} /><p />
-  
+
               <label className={st.label}>Confirm Password</label>
               <input onChange={(e)=>{setConPass(e.target.value)}} value={conPass} type="text" name="confirm" id="confirm" placeholder="Enter confirm password" className={st.input} />
-  
+
               <Link href="#">
                 <p className={st.forgot}>Forgot your password</p>
               </Link>                    
-  
+
               <input onClick={atSave} type="submit" name="save" id="save" value="Save" className={st.btn} />
-  
+
             </div>
         </div>  
       </>

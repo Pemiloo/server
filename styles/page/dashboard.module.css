@@ -1,7 +1,7 @@
 .containerFluid{  /*reusable selector*/
   max-width: 1440px;
   width: 100%;
-  padding: 75px 10px 0;
+  padding: 75px 25px 0;
   min-height: 100vh;
   margin: auto;
 }
@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 .col{
@@ -61,7 +62,7 @@
    -webkit-line-clamp: 4; /* number of lines to show */
    -webkit-box-orient: vertical;
 }
-main.row{max-height: 580px;}
+.wrap{flex-wrap: wrap;} main.row{margin-bottom: 35px;}
 .detail::-webkit-scrollbar  , .recentRoom > .column::-webkit-scrollbar{width: 8px;}
 .detail::-webkit-scrollbar-track , .recentRoom > .column::-webkit-scrollbar-track{background-color: transparent;}
 .detail::-webkit-scrollbar-thumb , .recentRoom > .column::-webkit-scrollbar-thumb{background-color: #33333333; border-radius: 25px;}
@@ -70,6 +71,7 @@ main.row{max-height: 580px;}
 
 .info{  /*custom selector*/
   width: 50%;
+  margin-bottom: 25px;
 }
 .info .col{
   width: 22%;
@@ -90,21 +92,21 @@ main.row{max-height: 580px;}
 }
 .graphRoom{
   width: 100%;
-  height: 100%;
+  min-height: 450px;
   margin-top: 20px;
   border-radius: 8px;
-  background-color: salmon;
+  display: flex;
+  align-items: flex-end;
 }
 
 
 .detailRoom{  /*custom selector*/
-  width: 27%;
-  padding: 0px 15px;
+  width: 50%;
+  padding-left: 15px;
 }
 .detail{
   margin-top: 17px;
   width: 100%;
-  overflow-y: scroll;
   background-color: #f6f6f6;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
@@ -112,18 +114,20 @@ main.row{max-height: 580px;}
   padding: 15px;
 }
 .room .txt{margin-top: 5px;}
-.candidates{margin-top: 10px;}
+.candidates{margin-top: 15px;}
 select.select{
-  width: 60%;
+  width: 40%;
   height: 100%;
   background-color: #FAFAFA;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid #5096D7;
+  outline: none;
   border-radius: 8px;
   font-weight: 600;
   color: #5096D7;
-  padding-left: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
 }
-.candidate{margin-top: 10px;}
+.candidate{margin-top: 10px; width: 50%;}
 .candidate img{
   width: 50px;
   height: 50px;
@@ -138,14 +142,27 @@ select.select{
   padding: 5px 10px;
 }
 .candidate .txt{-webkit-line-clamp: 1;}
+.btnRoom{
+  margin-top: 15px;
+  border-radius: 6px;
+  outline: none;
+  border: 1px solid #5096D7;
+  background-color: #ffffff;
+  padding: 5px 10px;
+  margin-right: 15px;
+  cursor: pointer;
+  color: #5096D7;
+  position: relative;
+}.btnRoom:last-child{padding-right: 0px; width: 60%; margin-right: 0px;}
+.btnRoom > input{padding-left: 80px; border: none; outline: none; padding-right: 5px;}
+.btnRoom > label {position: absolute; z-index: 1; margin: auto;}
 .status{margin-top: 10px;} 
-.status > .row{margin-top: 10px;} 
+.status > .row{margin-top: 10px;}
 
 
 .recentRoom{ /*custom selector*/
-  width: 23%;
+  width: 100%;
 }
-.recentRoom > .column { overflow-y: scroll; }
 button.expand{
   margin-top: 10px;
   padding: 10px 20px;
@@ -155,41 +172,33 @@ button.expand{
   border-radius: 8px;
   cursor: pointer;
 } button.expand:hover{background-color: #5096D7;}
-.recentRoom .room{margin-top: 15px;}
+.recentRoom .room{margin-top: 20px; width: 33.33%; padding-right: 15px;}
 
 @media screen and (max-width : 1400px){ /*responsive selector*/
   .containerFluid{padding: 75px 40px 0;}
-  main.row{max-height: 535px; margin-bottom: 10px;}
   .detail::-webkit-scrollbar  , .recentRoom > .column::-webkit-scrollbar{width: 6px;}
   .headtxt{font-size: larger;}
   .subheadtxt{font-size: medium;}
   .txt{font-size: small;}
-  main.row{ flex-wrap: wrap; justify-content: center; max-height: none;}
-  .info{
-    width: 100%;
-    margin-bottom: 15px;
-  }
+  .info{width: 100%;}
   .info .flex{justify-content: flex-start; flex-wrap: wrap;}
   .info .col{padding: 10px; justify-content: flex-start; max-width: 150px;}
-  .graphRoom{min-height: 425px;}
-  .candidates > .column , .recentRoom .column{ 
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: space-between;}
+  .graphRoom{min-height: 420px;}
   .detailRoom , .candidate , .recentRoom {width: 50%;}
-  .detailRoom{padding-left: 0;}
-  .recentRoom .room{width: 50%; padding-right: 15px;}
-  .detailRoom .headtxt{-webkit-line-clamp: 1;}
+  .detailRoom{ padding: 0; padding-right: 15px;}
+  .btnRoom:last-child{width: 100%;}
+  .recentRoom .room{width: 100%;}
   select.select{width: 50%;}
 }
 @media screen and (max-width: 800px){
   .containerFluid{padding: 65px 30px 0;}
   .info .col{width: 25%; max-width: none;}
-  .graphRoom{display: none;}
+  /* .graphRoom{display: none;} */
   .detail{background-color: #ffffff; border: none; padding: 5px;}
   .detailRoom{width: 100%; margin-bottom: 15px; padding-right: 0;}
-  .candidate{width: 33.3%;}
+  .candidate{width: 33.33%;}
   .recentRoom{width: 100%;}
+  .recentRoom .room{width: 50%;}
   select.select{width: 40%;}
 }
 @media screen and (max-width : 500px) {

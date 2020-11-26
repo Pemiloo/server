@@ -28,8 +28,12 @@ export async function getCountRoomSta(email = "", sta = true){
   return res.count;
 }
 
-export async function getListRoom(email = ""){
-  return await httpR.post('/findAll', {param : {emailAdmin:email}});
+export async function getListRoom(email = ""){    
+  if(email != ""){    
+    return await httpR.post('/findAll', {param : {emailAdmin:email}});
+  }else{
+    return undefined;
+  }
 }
 
 export async function updateRoom(room = "", update = new Object()){

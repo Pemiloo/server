@@ -3,15 +3,35 @@ import Register from '../components/auth/register'
 import Login from '../components/auth/login'
 import Head from 'next/head';
 
+import { useContext } from 'react';
+import { State, Dispatch, Action } from '../../lib';
+
+const { LOGIN, SIGNUP } = Action;
+
 const Auth = () => {
+
+  const Stat = useContext(State);
+  const Disp = useContext(Dispatch);  
+
+  const atClickLogin = () => {    
+    Disp({tipe:LOGIN});    
+  };
+
+  const atClickSignup = () => {
+    Disp({tipe:SIGNUP});
+  };
+
   return(
-    <html lang="en"> 
+    <>
+    {/* <html lang="en">  */}
+
       <Head>
         <title>Pemilo - authentification</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/pemilo.svg" />
       </Head>
+
       <div className={s.containerFluid}>
         <div className={s.container}>
           <div className={s.sideCard}>
@@ -26,20 +46,21 @@ const Auth = () => {
           <div className={s.formCard}>
 
             <div className={s.switchBtn}>
-              <div className={`${s.half} ${s.register}`}>
+              <div className={`${s.half} ${s.register}`} onClick={atClickSignup} >
                 <span>REGISTER</span>
               </div>
-              <div className={`${s.half} ${s.login}`}>
+              <div className={`${s.half} ${s.login}`} onClick={atClickLogin}>
                 <span>LOGIN</span>
               </div>
             </div>
-            {/* <Register></Register> */}
-            <Login></Login>
-
+            {
+              ( Stat.authSta === true) ? <Register></Register> : <Login></Login>
+            }                        
           </div>
         </div>
       </div>
-    </html>
+    {/* </html> */}
+    </>
   )
 }
 

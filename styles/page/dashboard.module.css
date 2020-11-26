@@ -151,8 +151,8 @@ select.select{
   cursor: pointer;
   color: #5096D7;
   position: relative;
-}.btnRoom:last-child{padding-right: 90px; width: 60%; margin-right: 0px;}
-.btnRoom > input{padding-left: 80px; border: none; outline: none; padding-right: 5px;}
+}.btnRoom:last-child{padding-right: 0px; width: 60%; margin-right: 0px;}
+.btnRoom > input{padding-left: 90px; border: none; outline: none; padding-right: 5px;}
 .btnRoom > label {position: absolute; z-index: 1; margin: auto;}
 .status{margin-top: 10px;} 
 .status > .row{margin-top: 10px;}

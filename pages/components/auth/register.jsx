@@ -1,10 +1,17 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react';
-import { set } from '../../../lib';
+import { useState, useContext } from 'react';
+
+import { StatePatch, Action } from '../../../lib';
 
 import s from '../../../styles/components/auth/register.module.css'
 
+const { REGIS } = Action;
+
 const Register = () => {
+
+  const Cont = useContext(StatePatch);  
+  
+  const Disp = Cont.dispatch;    
 
   const router = useRouter();
 
@@ -21,7 +28,7 @@ const Register = () => {
     const staPass = cheState(pass);
 
     if(staMail && staPass){
-      set("Register", {mail, pass});
+      Disp({tipe:REGIS, payload : {register:{mail, pass}}});      
       router.push('/page/next-register');
     }
     else if(!staMail){

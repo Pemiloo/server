@@ -4,14 +4,18 @@ import Login from '../components/auth/login'
 import Head from 'next/head';
 
 import { useContext } from 'react';
-import { State, Dispatch, Action } from '../../lib';
+import { StatePatch, Action } from '../../lib';
 
 const { LOGIN, SIGNUP } = Action;
 
-const Auth = () => {
+const Auth = () => {  
 
-  const Stat = useContext(State);
-  const Disp = useContext(Dispatch);  
+  const Cont = useContext(StatePatch);  
+
+  const Stat = Cont.state;
+  const Disp = Cont.dispatch;  
+
+  console.log(Stat);
 
   const atClickLogin = () => {    
     Disp({tipe:LOGIN});    
@@ -46,10 +50,10 @@ const Auth = () => {
           <div className={s.formCard}>
 
             <div className={s.switchBtn}>
-              <div className={`${s.half} ${s.register}`} onClick={atClickSignup} >
+              <div className={ (Stat.authSta === true) ? `${s.half} ${s.active}` : `${s.half} ${s.nonactive}` } onClick={atClickSignup} >
                 <span>REGISTER</span>
               </div>
-              <div className={`${s.half} ${s.login}`} onClick={atClickLogin}>
+              <div className={ (Stat.authSta === false) ? `${s.half} ${s.active}` : `${s.half} ${s.nonactive}`} onClick={atClickLogin}>
                 <span>LOGIN</span>
               </div>
             </div>

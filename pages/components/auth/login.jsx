@@ -16,17 +16,21 @@ const Login = () => {
     return (st = "") ? false : true;
   }
 
-  const atClick = async () => {
+  const atClick = async (e) => {
     
+    e.preventDefault();
+
     const staMail = cheState(mail);
     const staPass = cheState(pass);
 
     if(staMail && staPass){
-      const res = await signinAdmin(mail, pass);
-      if(res){
-        set("Auth", mail);
-        router.push('/page/dashboard');
-      }else{
+      try {
+        const res = await signinAdmin(mail, pass);            
+        if(res){
+          set("Auth", mail);
+          router.push('/page/dashboard');
+        }
+      } catch (error) {
         alert("Email atau Password tidak sesuai!");
       }      
     }
@@ -54,7 +58,7 @@ const Login = () => {
             <span className={s.txt} href="#">Forgot your password?</span>
           </div>
 
-          <input onClick={atClick} type="submit" name="login" id="login" value="Login" className={s.btn}/>        
+          <input onClick={(e)=>{atClick(e)}} type="submit" name="login" id="login" value="Login" className={s.btn}/>        
         </form>
       </div>
     </div>

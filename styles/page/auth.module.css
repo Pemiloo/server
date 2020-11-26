@@ -67,6 +67,7 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 50px;
+  border-radius: 4px 0px 0px 4px
 }
 .half{
   padding: 4px 0px;
@@ -84,17 +85,15 @@
   font-size: 20px;
   line-height: 23px;
 }
-.register{
+.active{
   background: #5096D7;
   border: 1px solid #5096D7;
-  box-sizing: border-box;
-  border-radius: 4px 0px 0px 4px;
+  box-sizing: border-box;  
   color: #ffffff;
 }
-.login{
+.nonactive{
   border: 2px solid #5096D7;
-  box-sizing: border-box;
-  border-radius: 0px 4px 4px 0px;
+  box-sizing: border-box;  
   color: #5096D7;
 }
 

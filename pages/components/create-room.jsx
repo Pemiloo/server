@@ -1,8 +1,14 @@
-import React from 'react';
-import Head from 'next/head';
+import React, { useRef, useState } from 'react';
 import st from '../../styles/components/create-room.module.css';
 
 const createRoom = () =>{
+
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [pass, setPass] = useState("");
+
+  
+
   return(
     <div>
       <div className={st.container}>

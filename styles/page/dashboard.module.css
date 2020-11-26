@@ -92,11 +92,9 @@
 }
 .graphRoom{
   width: 100%;
-  min-height: 450px;
   margin-top: 20px;
   border-radius: 8px;
-  display: flex;
-  align-items: flex-end;
+  overflow: hidden;
 }
 
 

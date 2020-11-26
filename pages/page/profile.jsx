@@ -25,9 +25,9 @@ const index = () => {
                     </div>
                 </div>
                 <div className={st.column2}>
-                    {/* <Settings></Settings> */}
                     {/* <EditProfile></EditProfile> */}
                     <ChangePass></ChangePass>
+                    {/* <Settings></Settings> */}
                 </div>
             </div>
         

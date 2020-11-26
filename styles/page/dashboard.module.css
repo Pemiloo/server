@@ -154,7 +154,7 @@ select.select{
   color: #5096D7;
   position: relative;
 }.btnRoom:last-child{padding-right: 0px; width: 60%; margin-right: 0px;}
-.btnRoom > input{padding-left: 90px; border: none; outline: none; padding-right: 5px; padding-top: 2px;}
+.btnRoom > input{padding-left: 80px; border: none; outline: none; padding-right: 5px;}
 .btnRoom > label {position: absolute; z-index: 1; margin: auto;}
 .status{margin-top: 10px;} 
 .status > .row{margin-top: 10px;}
@@ -193,7 +193,7 @@ button.expand{
 @media screen and (max-width: 800px){
   .containerFluid{padding: 65px 30px 0;}
   .info .col{width: 25%; max-width: none;}
-  .graphRoom{display: none;}
+  /* .graphRoom{display: none;} */
   .detail{background-color: #ffffff; border: none; padding: 5px;}
   .detailRoom{width: 100%; margin-bottom: 15px; padding-right: 0;}
   .candidate{width: 33.33%;}

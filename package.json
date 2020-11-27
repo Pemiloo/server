@@ -8,6 +8,7 @@
     "start": "next start -p 3030"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "chart.js": "^2.9.4",
     "crypto-js": "^4.0.0",
     "md5": "^2.3.0",

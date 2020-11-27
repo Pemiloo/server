@@ -51,6 +51,7 @@ const nextRegister = () => {
   }
 
   const ceState = () => {
+    console.log(agg);
     if(agg === true && org != "" && photo != "" && alt != ""){
       return true;
     }
@@ -118,7 +119,7 @@ const nextRegister = () => {
                     <input onChange={(e)=>{atUpload(e.target.files[0])}} type="file" name="picture" id="picture" />
 
                     <p>
-                      <input onClick={(e)=>{setAgg(!agg)}} type="checkbox" name="check" id="check" required={true} className={style.checkbox} /><span className={style.pInfoCheck}>i am certify that all is true and complete</span>
+                      <input onChange={(e)=>{setAgg(!agg)}} type="checkbox" name="check" id="check" required={true} className={style.checkbox} /><span className={style.pInfoCheck}>i am certify that all is true and complete</span>
                     </p>
 
                     <input onClick={(e)=>{atDone(e)}} type="submit" name="done" id="done" className={style.btn} value="Done"/>

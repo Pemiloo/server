@@ -12,5 +12,6 @@ export async function getCandidate(room = "", position = ""){
 
 export async function addCandidate(room = "", name = "", photo = "", visi = "", misi = new Array(), position = "", kelas = ""){
   const res = await http.post('/Candidate', {codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position, classroom:kelas});
+  console.log(res);
   return (res.status === 'ok') ? true : false;
 }

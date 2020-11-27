@@ -3,13 +3,11 @@ import { Http } from '../lib';
 const httpA = new Http('http://34.101.95.115/v1/anggota');
 const httpR = new Http('http://34.101.95.115/v1/room');
 
-export async function createRoom(emailAdmin = "", name = "", desc = "", member = new Array(), pass = null){
-  const ob = (pass === null) ? {emailAdmin,nama:name,deskripsi:desc} : {emailAdmin,nama:name,deskripsi:desc,password : pass};
+export async function createRoom(emailAdmin = "", name = "", desc = "", pass = ""){
+  const obj = (pass === null) ? {emailAdmin,nama:name,deskripsi:desc} : {emailAdmin,nama:name,deskripsi:desc,password : pass};
   const resR = await httpR.post('/insert', obj); //membuat room
   if(resR.roomCode != undefined || resR.roomCode != null && resR.message === undefined){
-    member.map(item => item.codeRoom = resR.roomCode);
-    const resA = await httpA.post('/insertAll',member); //memasukan anggota sesuai dengan room yang telah dibuat    
-    return (resA.res === true || resA.message === undefined) ? true : false;
+    return resR.roomCode;
   }else return false;   
 }
 
@@ -28,12 +26,10 @@ export async function getCountRoomSta(email = "", sta = true){
   return res.count;
 }
 
-export async function getListRoom(email = ""){    
-  if(email != ""){    
-    return await httpR.post('/findAll', {param : {emailAdmin:email}});
-  }else{
-    return undefined;
-  }
+export async function getListRoom(email = ""){      
+  console.log(`${email} GetListRoom`);
+  const res = await httpR.post('/findAll', {param : {emailAdmin:email}});
+  return res;
 }
 
 export async function updateRoom(room = "", update = new Object()){

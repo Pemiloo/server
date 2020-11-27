@@ -147,30 +147,34 @@ const bulkOperation = async (email = "", room = "") => {
 
 export async function getServerSideProps(context){
 
-  const { email } = context.params;
+  const { email } = context.params;  
+  const daRoom = await getListRoom(email);
+
+  console.log(daRoom);
 
   return{
     props:{
-      parMail : email
+      parMail : email,
+      daRoom,
     }
   }
 }
 
-const Dashboard = ({parMail}) => {
+const Dashboard = ({parMail, daRoom}) => {
 
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
-  const [index, setIndex] = useState(0);  
-
-  const listRoom = useSWR(`/api/listRoom/${mail}`, ()=>{ return getListRoom(mail)});
+  const [index, setIndex] = useState(0);    
 
   useEffect(()=>{    
-    if(listRoom.data != undefined){
-      setRoom(listRoom.data[0].codeRoom);
-    }
-  },[listRoom.data]);
-
+    if(daRoom[0]  != undefined){
+      setRoom(daRoom[0].codeRoom);    
+    }else{
+      setRoom(daRoom);    
+    }    
+  },[]);
+  
   const { data } = useSWR(`/api/countTab/${mail}/${room}`, ()=>{ return bulkOperation(mail, room) });      
   
   const atMore = (ix = 0, newRoom = "") => {
@@ -178,7 +182,7 @@ const Dashboard = ({parMail}) => {
     setRoom(newRoom);
   }
   
-  if(data != undefined && listRoom.data != undefined){
+  if(data != undefined && daRoom != undefined){
     return(
       <> 
         <Head>
@@ -253,7 +257,7 @@ const Dashboard = ({parMail}) => {
               </div>
 
               {
-                (listRoom.data[index] === undefined ) ? null : <Desc datRoom={listRoom.data[index]} email={parMail} ></Desc>
+                (daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>
               }              
   
             </div>
@@ -269,7 +273,7 @@ const Dashboard = ({parMail}) => {
               {/* {`Recent or latest room`} */}
                 
                 {
-                  listRoom.data.map((e,i)=>{
+                  daRoom.map((e,i)=>{
                     return(
                       <div className={`${s.column} ${s.room}`} key={i} >
                         <div className={s.row}>

@@ -58,7 +58,7 @@ const ChangePass = ({email}) => {
     );
   }
   else{
-    return nulll;
+    return null;
   }
 }
 

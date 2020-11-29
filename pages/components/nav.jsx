@@ -3,11 +3,14 @@ import useSWR from 'swr'
 
 import {useContext} from 'react';
 import {getAdmin} from '../../api';
+import {useRouter} from 'next/router';
 import {StatePatch, Action} from '../../lib';
 
 const {CREATEROOM} = Action
 
 const Nav = ({email}) => {  
+
+  const router = useRouter();
 
   const Cont = useContext(StatePatch);
 
@@ -38,7 +41,7 @@ const Nav = ({email}) => {
               </div>
             </div>
   
-            <div className={s.profile}>              
+            <div className={s.profile} onClick={()=>router.push(`/page/${email}/profile`)}>              
               <img src={(data.linkPhoto != "")?data.linkPhoto:"/pemilo.svg"} alt="profile"></img>
             </div>
   

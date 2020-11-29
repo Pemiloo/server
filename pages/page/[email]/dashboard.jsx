@@ -156,7 +156,7 @@ export async function getServerSideProps(context){
   const { email } = context.params;  
   const daRoom = await getListRoom(email);
 
-  console.log(daRoom);
+  //console.log(daRoom);
 
   return{
     props:{
@@ -165,6 +165,84 @@ export async function getServerSideProps(context){
     }
   }
 }
+
+const generateData = () => {
+  return Math.round(Math.random() * 100);
+}
+
+const dataGrap = {
+  labels: [['June', '2015'], 'July', 'August', 'September', 'October', 'November', 'December', ['January', '2016'], 'February', 'March', 'April', 'May'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fill: false,
+      lineTension: 0.3,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+      ]
+    },
+    {
+      label: 'My Second dataset',
+      fill: false,
+      lineTension: 0.3,
+      backgroundColor: 'rgb(192,75,186)',
+      borderColor: 'rgb(171,75,192)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgb(180,75,192)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+      ]
+    }
+  ]
+};
 
 const Dashboard = ({parMail, daRoom}) => {
 
@@ -263,7 +341,7 @@ const Dashboard = ({parMail, daRoom}) => {
             {/* {`graph room while running`} */}
               <div className={s.graphRoom}>
                 {/* split code graph */}
-                {/* <Line data={data} /> */}
+                <Line data={dataGrap} />
               </div>
   
             </div>

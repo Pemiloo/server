@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import st from '../../styles/components/edit-room.module.css';
 
 const editRoom = ({email}) =>{
+
+  const [name, setName] = useState("");
+
   return(
     <div>
       <div className={st.container}>

@@ -13,7 +13,7 @@ const Auth = () => {
   const Cont = useContext(StatePatch);  
 
   const Stat = Cont.state;
-  const Disp = Cont.dispatch;  
+  const Disp = Cont.dispatch;    
 
   console.log(Stat);
 

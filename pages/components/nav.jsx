@@ -1,11 +1,21 @@
 import s from '../../styles/components/nav.module.css'
 import useSWR from 'swr'
 
-import { getAdmin } from '../../api';
+import {useContext} from 'react';
+import {getAdmin} from '../../api';
+import {StatePatch, Action} from '../../lib';
+
+const {CREATEROOM} = Action
 
 const Nav = ({email}) => {  
 
-  console.log("Render Nav");
+  const Cont = useContext(StatePatch);
+
+  const Disp = Cont.dispatch;
+
+  const atClickRoom = () => {
+    Disp({tipe:CREATEROOM});
+  }
 
   const {data} = useSWR(`/api/profile/${email}`, ()=>{ return getAdmin(email) });    
 
@@ -20,10 +30,10 @@ const Nav = ({email}) => {
           <div className={s.navMenu}>
   
             <div className={s.menuList}>
-              <div className={s.menu}>
+              <div className={s.menu} onClick={atClickRoom}>
                 <span>Room</span>
               </div>
-              <div className={s.menu}>
+              <div className={s.menu} onClick={atClickRoom}>
                 <img src="/icon/plus.svg" alt="icon plus"/>
               </div>
             </div>

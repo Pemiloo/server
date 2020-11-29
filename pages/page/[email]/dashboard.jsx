@@ -2,18 +2,16 @@ import s from '../../../styles/page/dashboard.module.css'
 import Nav from '../../components/nav';
 import Head from 'next/head';
 import useSWR from 'swr';
-
-import { Line } from 'react-chartjs-2';
-import { getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
-import { useEffect, useState } from 'react';
-import { get } from '../../../lib';
-import { Router, useRouter } from 'next/router';
 import EditRoom from '../../components/edit-room';
 import CreateRoom from '../../components/create-room';
 
-const generateData = () => {
-  return Math.round(Math.random() * 100);
-}
+import {Line } from 'react-chartjs-2';
+import {useRouter} from 'next/router';
+import {StatePatch, Action} from '../../../lib';
+import {useEffect, useState, useContext} from 'react';
+import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
+
+const {EDITROOM} = Action;
 
 const CandidateSection = ({room, position = "Ketua"}) => {
 
@@ -59,6 +57,10 @@ const EndSection = ({data}) => {
 
 const Desc = ({datRoom, email}) => {  
 
+  const Cont = useContext(StatePatch);
+
+  const Disp = Cont.dispatch;
+
   const router = useRouter();
 
   const [op, setOp] = useState("Ketua");
@@ -67,6 +69,10 @@ const Desc = ({datRoom, email}) => {
 
   const atAddCandidate = () => {
     router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
+  }
+
+  const atEditRoom = () => {
+    Disp({tipe:EDITROOM});
   }
 
   return(
@@ -110,7 +116,7 @@ const Desc = ({datRoom, email}) => {
         <div className={`${s.row} ${s.wrap}`}>
 
           <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>add candidate</button>
-          <button className={`${s.txt} ${s.btnRoom}`}>edit room</button>
+          <button onClick={atEditRoom} className={`${s.txt} ${s.btnRoom}`}>edit room</button>
           <div className={`${s.txt} ${s.btnRoom}`}>                    
             <label> Room Code </label>
             <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
@@ -162,6 +168,10 @@ export async function getServerSideProps(context){
 
 const Dashboard = ({parMail, daRoom}) => {
 
+  const Cont = useContext(StatePatch);
+
+  const Stat = Cont.state;
+
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
@@ -174,13 +184,13 @@ const Dashboard = ({parMail, daRoom}) => {
       setRoom(daRoom);    
     }    
   },[]);
-  
+
   const { data } = useSWR(`/api/countTab/${mail}/${room}`, ()=>{ return bulkOperation(mail, room) });      
   
   const atMore = (ix = 0, newRoom = "") => {
     setIndex(ix);
     setRoom(newRoom);
-  }
+  }  
   
   if(data != undefined && daRoom != undefined){
     return(
@@ -191,9 +201,17 @@ const Dashboard = ({parMail, daRoom}) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="icon" href="/pemilo.svg" />
         </Head>
+        
         <Nav email={parMail}></Nav>
-        {/* <CreateRoom></CreateRoom> */}
-        {/* <EditRoom></EditRoom> */}
+        
+        {
+          (Stat.doubleModalRoom.create === true) ? <CreateRoom email={parMail}></CreateRoom> : null
+        }
+
+        {
+          (Stat.doubleModalRoom.edit === true) ? <EditRoom email={parMail} ></EditRoom> : null
+        }
+
         <div className={s.containerFluid}>
   
           <div className={s.row}>
@@ -251,27 +269,18 @@ const Dashboard = ({parMail, daRoom}) => {
             </div>
   
             <div className={`${s.column} ${s.detailRoom}`}>
-  
               <div className={s.row}>
                 <span className={s.headsection}>Detail Room</span>
               </div>
-
-              {
-                (daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>
-              }              
-  
+              {(daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>}              
             </div>
   
-            <div className={`${s.column} ${s.recentRoom}`}>
-  
+            <div className={`${s.column} ${s.recentRoom}`}>  
               <div className={s.row}>
                 <span className={s.headsection}>Recent Room</span>
-              </div>
-  
-              <div className={`${s.row} ${s.wrap}`}>
-  
-              {/* {`Recent or latest room`} */}
-                
+              </div>  
+              <div className={`${s.row} ${s.wrap}`}>  
+              {/* {`Recent or latest room`} */}                
                 {
                   daRoom.map((e,i)=>{
                     return(
@@ -292,8 +301,7 @@ const Dashboard = ({parMail, daRoom}) => {
                       </div>
                     )
                   })
-                }              
-  
+                }                
               </div>
   
             </div>
@@ -309,4 +317,4 @@ const Dashboard = ({parMail, daRoom}) => {
   }
 
 }
-export default Dashboard
+export default Dashboard;

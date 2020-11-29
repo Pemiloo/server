@@ -1,7 +1,7 @@
 import React from 'react';
 import st from '../../styles/components/edit-room.module.css';
 
-const editRoom = () =>{
+const editRoom = ({email}) =>{
   return(
     <div>
       <div className={st.container}>

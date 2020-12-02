@@ -28,7 +28,7 @@ const CandidateSection = ({room, position = "Ketua"}) => {
                 <img src={e.photo} alt={"Photo"}/>
                 <div className={s.column}>
                   <span className={s.txt}>{e.name}</span>
-                  <span className={s.txt}>{`Kelas ${e.classroom}`}</span>
+                  <span className={s.txt}>{`${e.classroom}`}</span>
                 </div>
               </div>
             </div>

@@ -53,14 +53,14 @@ const EditProfile = ({email}) => {
   
           <div className={st.wrap}>
             <label>Your Organization</label>
-            <input onChange={(e)=>{setNewOrg(e.target.value)}} value={newOrg} type="text" name="organization" id="organization" placeholder="Your organization" className={st.input} />
+            <input onChange={(e)=>{setNewOrg(e.target.value)}} type="text" name="organization" id="organization" placeholder="Your organization" className={st.input} />
   
             <div className={st.committe}>
               <label>Your Committe</label>
               {
                 newCom.map((e,i)=>{
                   return(
-                    <input onChange={(el)=>{changeNewCom(i,el.target.value)}} value={e} key={i} type="text" name="committe" placeholder="Your committe" className={st.input} />
+                    <input onChange={(el)=>{changeNewCom(i,el.target.value)}} defaultValue={e} key={i} type="text" name="committe" placeholder="Your committe" className={st.input} />
                   )
                 })
               }

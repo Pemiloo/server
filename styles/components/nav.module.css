@@ -5,6 +5,8 @@
   z-index: 1;
   position: fixed;
   top: 0;
+}.logo{
+  cursor: pointer;
 }
 .container{
   max-width: 1440px;

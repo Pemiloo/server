@@ -28,7 +28,9 @@ const roomCandidate = ({room, email}) => {
   const [newPosition, setPosition] = useState("");
   const [newVisi, setNewVisi] = useState("");
   const [newMisi, setNewMisi] = useState([""]);
-  const [linkPhoto, setLinkPhoto] = useState("");  
+  const [linkPhoto, setLinkPhoto] = useState(""); 
+  
+  const [staPhoto, setStaPhoto] = useState(true);
 
   const addNewMisi = () => {
     setNewMisi([...newMisi, ""]);
@@ -39,10 +41,12 @@ const roomCandidate = ({room, email}) => {
   }
 
   const atUpload = (e) => {    
+    setStaPhoto(false);
     const file = uploadFile(e);
     fetch('https://api.cloudinary.com/v1_1/kotakjualan/image/upload', file)
     .then(res => res.json())
-    .then(res => {      
+    .then(res => {     
+      setStaPhoto(true); 
       setLinkPhoto(res.secure_url);      
     })
     .catch(err => console.log(err));    
@@ -54,12 +58,15 @@ const roomCandidate = ({room, email}) => {
     setNewMisi(tm);
   }
 
-  const atSave = async () => {
-    console.log(newMisi);
-    if(newName != "" && linkPhoto != "" && newVisi != "" && newMisi.length != 0 && (newPosition === "Ketua" || newPosition === "Wakil Ketua") && newClass != ""){
+  const atSave = async () => {    
+    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && (newPosition === "Ketua" || newPosition === "Wakil Ketua") && newClass != ""){
       const res = await addCandidate(room, newName, linkPhoto, newVisi, newMisi, newPosition, newClass);
-      (res) ? alert("Berhasil") : alert("Gagal");
+     if(res === true){
+      alert("Berhasil");
       router.push(`/page/${email}/dashboard`);
+     }else{
+       alert("Gagal");
+     }
     }
     else{
       alert("Masih Salah Format!");
@@ -75,53 +82,61 @@ const roomCandidate = ({room, email}) => {
         <link rel="icon" href="/pemilo.svg" />
       </Head>
 
-      <Nav></Nav>
+      <Nav email={email}></Nav>
+
       <div className={st.containerFluid}>
                           
         <div className={st.containerForm}>
           
           <div className={st.candidateImg}>
             <img className={st.imgThumb} src={(linkPhoto != "")?linkPhoto:"/pemilo.svg"} alt="candidate image"/>            
-            <img onClick={atImageClick} className={st.imgCam} src="/icon/VectorCamera.svg" height="25px"></img>
+            <img onClick={atImageClick} className={st.imgCam} src="/icon/VectorCamera.svg" height="25px"></img>            
             <input hidden ref={refFile} onChange={(e)=>{atUpload(e.target.files[0])}} type="file"></input>            
           </div>
           
+          {
+            (staPhoto) ? null : <p>Loading..</p>
+          }          
+
           <div className={st.candidateDetail}>
-            <input onChange={(e)=>{setName(e.target.value)}} value={newName} type="text" className={st.input} placeholder="Candidate Name" />
+            <div className={st.box100}>
+              <label>Candidate Name</label><br />
+              <input onChange={(e)=>{setName(e.target.value)}} value={newName} type="text" className={st.input} />
+            </div>
     
             <div className={st.flexForm1}>
               <div className={st.box}>
                 <label>Class</label><br />
-                <input onChange={(e)=>{setClass(e.target.value)}} value={newClass} type="text" name="class" id="class" placeholder="Candidate Class" className={st.input} />
+                <input onChange={(e)=>{setClass(e.target.value)}} value={newClass} type="text" name="class" id="class" className={st.input} />
               </div>
               <div className={st.box}>
                 <label>Position</label><br />
-                <input onChange={(e)=>{setPosition(e.target.value)}} value={newPosition} type="text" name="position" id="position" placeholder="Candidate Position" className={st.input} />
+                <input onChange={(e)=>{setPosition(e.target.value)}} value={newPosition} type="text" name="position" id="position" className={st.input} />
               </div>
             </div>
                 
             <div className={st.vision}>
-              <label>Vision</label>
-              <textarea onChange={(e)=>{setNewVisi(e.target.value)}} value={newVisi} name="vision" rows="5" className={st.textarea} placeholder="Your vision"></textarea>
+              <label>Visi</label>
+              <textarea onChange={(e)=>{setNewVisi(e.target.value)}} value={newVisi} name="vision" rows="5" className={st.textarea} ></textarea>
             </div>
 
             <div className={st.mision}>
-              <label>Missions</label>
+              <label>Misi</label>
               {
                 newMisi.map((e, i)=>{
                   return (
-                    <input onChange={(e)=>{ changeNewMisi(i, e.target.value) }} type="text" name="mision" key={i} className={st.input} placeholder="Your mision" />
+                    <input onChange={(e)=>{ changeNewMisi(i, e.target.value) }} type="text" name="mision" key={i} className={st.input} />
                   )
                 })
               }
             </div>
             
             <div className={st.addMision}>
-              <button onClick={addNewMisi} className={st.Btn}>add more missions</button>
+              <button onClick={addNewMisi} className={st.Btn}>Add more (+)</button>
             </div>
 
             <div className={st.submitCandidate}>
-              <button onClick={atSave} className={st.Btn}>Submit</button>
+              <button onClick={atSave} className={st.Btn}>Save (+)</button>
             </div>
           </div>
 

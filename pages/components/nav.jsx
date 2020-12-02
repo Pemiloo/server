@@ -27,7 +27,7 @@ const Nav = ({email}) => {
       <div className={s.containerFluid}>
         <div className={s.container}>
   
-          <div className={s.logo}>
+          <div className={s.logo} onClick={()=>{router.push(`/page/${email}/dashboard`);}}>
             <img src="/logo.svg" alt="logo pemilo"/>
           </div>
           <div className={s.navMenu}>

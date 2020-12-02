@@ -63,7 +63,7 @@
    -webkit-line-clamp: 4; /* number of lines to show */
    -webkit-box-orient: vertical;
 }
-.wrap{flex-wrap: wrap;} main.row{margin-bottom: 35px;}
+.wrap{flex-wrap: wrap; margin-top: 15px;margin-bottom: 5px;} main.row{margin-bottom: 35px;}
 
 .info{  /*custom selector*/
   width: 60%;
@@ -133,7 +133,9 @@ select.select{
   justify-content: center;
   padding: 5px 10px;
 }
-.candidate .txt{-webkit-line-clamp: 1;}
+.candidate .txt{
+  margin-bottom: 3px;
+  -webkit-line-clamp: 1; font-weight: 300;font-size: normal;}
 .btnRoom{
   margin-top: 15px;
   border-radius: 6px;

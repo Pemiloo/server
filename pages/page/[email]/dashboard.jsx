@@ -1,15 +1,17 @@
 import s from '../../../styles/page/dashboard.module.css'
 import Nav from '../../components/nav';
 import Head from 'next/head';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import EditRoom from '../../components/edit-room';
 import CreateRoom from '../../components/create-room';
 
 import {Line } from 'react-chartjs-2';
 import {useRouter} from 'next/router';
 import {StatePatch, Action} from '../../../lib';
-import {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
+import { uploadFileXl } from '../../../lib';
+import { delAll } from '../../../lib';
 
 const {EDITROOM} = Action;
 
@@ -77,7 +79,7 @@ const Recent = ({daRoom, atMore}) => {
                   </span>
                 </div>
                 <div className={s.row}>
-                  <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>More</button>
+                  <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>more</button>
                 </div>
               </div>
             )
@@ -97,12 +99,31 @@ const Desc = ({datRoom, email}) => {
 
   const router = useRouter();
 
-  const [op, setOp] = useState("Ketua");
+  const [op, setOp] = useState("Ketua");  
+  const [staForm, setStaForm] = useState(true);
 
   const { data } = useSWR('/api/option', ()=>{ return getOption('position') });
 
   const atAddCandidate = () => {
     router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
+  }
+
+  const atChangeFileForm = (file) => {        
+    setStaForm(false);      
+    const op = uploadFileXl(file, datRoom.codeRoom);
+    fetch('http://34.101.95.115/v1/anggota/uploads', op)
+    .then(res => res.json())
+    .then(res => {
+      setStaForm(true);
+      alert("Selesai Upload");        
+      mutate(`/api/countTab/${email}/${datRoom.codeRoom}`);
+    })
+    .catch(err => console.log(err));
+  }
+
+  const atLogOut = () => {    
+    delAll();
+    router.push(`/page/auth`);
   }
 
   const atEditRoom = () => {
@@ -163,13 +184,16 @@ const Desc = ({datRoom, email}) => {
              
             </div>
 
-  
-
           </div>
 
           <div className={s.btnCon}>
-            <input type="file" />< p/>
-            <button className={s.btnLogout}>Logout</button>
+            <div className={s.wrapFile}>
+              <label>Participant</label><br></br>
+              {
+                (staForm) ? <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }}/> : <span>Loading..</span>
+              }              
+            </div>
+            <button className={s.btnLogout} onClick={atLogOut} >Logout</button>
           </div>
         </div>
 
@@ -292,7 +316,7 @@ const dataGrap = {
   ]
 };
 
-const Dashboard = ({parMail, daRoom}) => {
+const Dashboard = React.memo(({parMail, daRoom}) => {
 
   const Cont = useContext(StatePatch);
 
@@ -415,5 +439,5 @@ const Dashboard = ({parMail, daRoom}) => {
     return null;
   }
 
-}
+});
 export default Dashboard;

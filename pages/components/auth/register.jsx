@@ -56,7 +56,7 @@ const Register = () => {
             <span className={s.txt}>I am certify that email still active </span>
           </div> */}
 
-          <input onClick={(e)=>{atClick(e)}} name="register" id="register" className={s.btn} type="submit"></input>
+          <input onClick={(e)=>{atClick(e)}} name="register" id="register" className={s.btn} type="submit" value="Register"></input>
         </form>
       </div>
     </div>

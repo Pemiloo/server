@@ -40,10 +40,10 @@ const ChangePass = ({email}) => {
               <input value={oldPass} type="text" name="old" id="old" placeholder="Enter your old password" className={st.input} readOnly/><p />
               
               <label className={st.label}>New Password</label>
-              <input onChange={(e)=>{setNewPass(e.target.value)}} value={newPass} type="text" name="new" id="new" placeholder="Enter new password" className={st.input} /><p />
+              <input onChange={(e)=>{setNewPass(e.target.value)}} value={newPass} type="password" name="new" id="new" placeholder="Enter new password" className={st.input} /><p />
 
               <label className={st.label}>Confirm Password</label>
-              <input onChange={(e)=>{setConPass(e.target.value)}} value={conPass} type="text" name="confirm" id="confirm" placeholder="Enter confirm password" className={st.input} />              
+              <input onChange={(e)=>{setConPass(e.target.value)}} value={conPass} type="password" name="confirm" id="confirm" placeholder="Enter confirm password" className={st.input} />              
 
               <input onClick={atSave} type="submit" name="save" id="save" value="Save" className={st.btn} />
 

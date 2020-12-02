@@ -18,7 +18,7 @@ const CandidateSection = ({room, position = "Ketua"}) => {
   const {data} = useSWR(`/api/CandidateSection/${room}/${position}`, ()=>{ return getCandidate(room, position) });
 
   if(data != undefined){
-    return(
+    return( 
       <>
       {
         data.map((e,i)=>{
@@ -59,19 +59,18 @@ const Recent = ({daRoom, atMore}) => {
   return(
     <div className={`${s.column} ${s.recentRoom}`}>  
       <div className={s.row}>
-        <span className={s.headsection}>Recent Room</span>
+        <span className={s.headsection}>List Room</span>
       </div>  
       <div className={`${s.row} ${s.wrap}`}>  
       {/* {`Recent or latest room`} */}                
         {
           daRoom.map((e,i)=>{
             return(
-              <div className={`${s.column} ${s.room}`} key={i} >
-                <div className={s.row}>
-                  <div className={s.headtxt}>
-                    <span>{e.nama}</span>
+              <div className={`${s.column} ${s.room} ${s.column3}`} key={i} >
+                <div className={`${s.headtxt}`}>
+                  <span>{e.nama}</span>
+                      <img src="/icon/close.svg" height="25px" />
                   </div>
-                </div>
                 <div className={s.row}>
                   <span className={s.txt}>
                     {e.deskripsi}
@@ -160,8 +159,17 @@ const Desc = ({datRoom, email}) => {
             <div className={`${s.txt} ${s.btnRoom}`}>                    
               <label> Room Code </label>
               <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
+
+             
             </div>
 
+  
+
+          </div>
+
+          <div className={s.btnCon}>
+            <input type="file" />< p/>
+            <button className={s.btnLogout}>Logout</button>
           </div>
         </div>
 

@@ -26,20 +26,19 @@
 }
 .wrap .input:focus{border: 2px solid #5096D7; box-sizing: border-box;border-radius: 5px;}
 .wrap .committe{margin-top: 30px;}
-.wrap .containerIcon{margin-top: 10px; display: flex; justify-content: center;}
+.wrap .containerIcon{margin-top: 10px;}
 .wrap .committe label{color: #5096D7;}
 .wrap .btn{
-    background: #6EADE8;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border-radius: 8px;
+    background: #6EADE8;        
+    border-radius: 5px;
     color: #F4F4F4;
     padding: 10px;
     width: 100px;
     margin-top: 70px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
     outline: none;
+    border: none;
 }
 
 .wrap .btn:hover{opacity: 0.6; cursor: pointer;}

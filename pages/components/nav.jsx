@@ -34,11 +34,11 @@ const Nav = ({email}) => {
   
             <div className={s.menuList}>
               <div className={s.menu} onClick={atClickRoom}>
-                <span>Room</span>
+                <span>Room (+)</span>
               </div>
-              <div className={s.menu} onClick={atClickRoom}>
+              {/* <div className={s.menu} onClick={atClickRoom}>
                 <img src="/icon/plus.svg" alt="icon plus"/>
-              </div>
+              </div> */}
             </div>
   
             <div className={s.profile} onClick={()=>router.push(`/page/${email}/profile`)}>              

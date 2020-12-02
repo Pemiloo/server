@@ -55,6 +55,41 @@ const EndSection = ({data}) => {
   );
 }
 
+const Recent = ({daRoom, atMore}) => {
+  return(
+    <div className={`${s.column} ${s.recentRoom}`}>  
+      <div className={s.row}>
+        <span className={s.headsection}>Recent Room</span>
+      </div>  
+      <div className={`${s.row} ${s.wrap}`}>  
+      {/* {`Recent or latest room`} */}                
+        {
+          daRoom.map((e,i)=>{
+            return(
+              <div className={`${s.column} ${s.room}`} key={i} >
+                <div className={s.row}>
+                  <div className={s.headtxt}>
+                    <span>{e.nama}</span>
+                  </div>
+                </div>
+                <div className={s.row}>
+                  <span className={s.txt}>
+                    {e.deskripsi}
+                  </span>
+                </div>
+                <div className={s.row}>
+                  <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>More</button>
+                </div>
+              </div>
+            )
+          })
+        }                
+      </div>
+
+    </div>
+  );
+}
+
 const Desc = ({datRoom, email}) => {  
 
   const Cont = useContext(StatePatch);
@@ -76,67 +111,72 @@ const Desc = ({datRoom, email}) => {
   }
 
   return(
-    <div className={`${s.column} ${s.detail}`}>  
-    {/* {`room title and description`} */}
-      <div className={`${s.column} ${s.room}`}>
-        <div className={s.row}>
-          <div className={s.headtxt}>
-            <span>{datRoom.nama}</span>
+    <div className={`${s.column} ${s.detailRoom}`}>      
+
+      <div className={`${s.column} ${s.detail}`}>  
+      {/* {`room title and description`} */}
+        <div className={`${s.column} ${s.room}`}>
+          <div className={s.row}>
+            <span className={s.headsection}>Detail Room</span>
+          </div>
+          <div className={s.row}>
+            <div className={s.headtxt}>
+              <span>{datRoom.nama}</span>
+            </div>
+          </div>
+
+          <div className={s.row}>
+            <span className={s.txt}>
+              {datRoom.deskripsi}
+            </span>
           </div>
         </div>
 
-        <div className={s.row}>
-          <span className={s.txt}>
-            {datRoom.deskripsi}
-          </span>
-        </div>
-      </div>
-
-    {/* {`candidate and position`} */}
-      <div className={`${s.column} ${s.candidates}`}>
-        <div className={s.flex}>
-          <div className={s.subheadtxt}>
-            <span>Candidate</span>
+      {/* {`candidate and position`} */}
+        <div className={`${s.column} ${s.candidates}`}>
+          <div className={s.flex}>
+            <div className={s.subheadtxt}>
+              <span>Candidate</span>
+            </div>
+            <select onChange={(e)=>{setOp(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
+              <option value="" disabled hidden>Position...</option>
+              {
+                ((data != undefined) ? data : []).map((e,i)=>{
+                  return(
+                    <option key={i} value={e}>{e}</option>                    
+                  )
+                })
+              }
+            </select>
           </div>
-          <select onChange={(e)=>{setOp(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
-            <option value="" disabled hidden>Position...</option>
-            {
-              ((data != undefined) ? data : []).map((e,i)=>{
-                return(
-                  <option key={i} value={e}>{e}</option>                    
-                )
-              })
-            }
-          </select>
-        </div>
-        <div className={`${s.row} ${s.wrap}`}>
-          {/* Bagian untuk Candidate Section*/}
-          <CandidateSection room={datRoom.codeRoom} position={op}></CandidateSection>
-        </div>
-        <div className={`${s.row} ${s.wrap}`}>
-
-          <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>add candidate</button>
-          <button onClick={atEditRoom} className={`${s.txt} ${s.btnRoom}`}>edit room</button>
-          <div className={`${s.txt} ${s.btnRoom}`}>                    
-            <label> Room Code </label>
-            <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
+          <div className={`${s.row} ${s.wrap}`}>
+            {/* Bagian untuk Candidate Section*/}
+            <CandidateSection room={datRoom.codeRoom} position={op}></CandidateSection>
           </div>
+          <div className={`${s.row} ${s.wrap}`}>
 
-        </div>
-      </div>
+            <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>Add Candidate (+)</button>
+            {/* <button onClick={atEditRoom} className={`${s.txt} ${s.btnRoom}`}>Edit Room</button> */}
+            <div className={`${s.txt} ${s.btnRoom}`}>                    
+              <label> Room Code </label>
+              <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
+            </div>
 
-    {/* {`status room start till end`} */}
-      <div className={`${s.column} ${s.status}`}>
-        <div className={s.row}>
-          <div className={`${s.column}`}>
-            <span className={s.subheadtxt}>Start</span>
-            <span className={s.txt}>{ datRoom.start }</span>
           </div>
         </div>
-        {
-          (datRoom.end != undefined) ? <EndSection data={datRoom.end} ></EndSection> : null
-        }
-        
+
+      {/* {`status room start till end`} */}
+        {/* <div className={`${s.column} ${s.status}`}>
+          <div className={s.row}>
+            <div className={`${s.column}`}>
+              <span className={s.subheadtxt}>Start</span>
+              <span className={s.txt}>{ datRoom.start }</span>
+            </div>
+          </div>
+          {
+            (datRoom.end != undefined) ? <EndSection data={datRoom.end} ></EndSection> : null
+          }        
+        </div> */}
       </div>
     </div>
   )
@@ -253,6 +293,8 @@ const Dashboard = ({parMail, daRoom}) => {
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
+  console.log(daRoom);
+
   const [index, setIndex] = useState(0);    
 
   useEffect(()=>{    
@@ -294,7 +336,7 @@ const Dashboard = ({parMail, daRoom}) => {
   
           <div className={s.row}>
             <div className={s.headpage}>
-              <span>Dashboard</span>
+              <span>DASHBOARD</span>
             </div>
           </div>
   
@@ -307,15 +349,15 @@ const Dashboard = ({parMail, daRoom}) => {
                 
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame participant.svg"} alt={"participant-icon"}/>
+                    {/* <img src={"/icon/Frame participant.svg"} alt={"participant-icon"}/> */}
                     <span className={s.headtxt}>{ (data[0] === undefined) ? 0 : data[0] }</span>
-                    <span className={s.txt}>participant</span>
+                    <span className={s.txt}>Participant</span>
                   </div>
                 </div>
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame room.svg"} alt={"room-icon"}/>
+                    {/* <img src={"/icon/Frame room.svg"} alt={"room-icon"}/> */}
                     <span className={s.headtxt}>{data[1]}</span>
                     <span className={s.txt}>Room Total</span>
                   </div>
@@ -323,7 +365,7 @@ const Dashboard = ({parMail, daRoom}) => {
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame active.svg"} alt={"roomActive-icon"}/>
+                    {/* <img src={"/icon/Frame active.svg"} alt={"roomActive-icon"}/> */}
                     <span className={s.headtxt}>{data[2]}</span>
                     <span className={s.txt}>Room Active</span>
                   </div>
@@ -331,7 +373,7 @@ const Dashboard = ({parMail, daRoom}) => {
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame expire.svg"} alt={"roomExpire-icon"}/>
+                    {/* <img src={"/icon/Frame expire.svg"} alt={"roomExpire-icon"}/> */}
                     <span className={s.headtxt}>{data[3]}</span>
                     <span className={s.txt}>Room Expired</span>
                   </div>
@@ -346,43 +388,14 @@ const Dashboard = ({parMail, daRoom}) => {
   
             </div>
   
-            <div className={`${s.column} ${s.detailRoom}`}>
+            {/* <div className={`${s.column} ${s.detailRoom}`}>
               <div className={s.row}>
                 <span className={s.headsection}>Detail Room</span>
               </div>
-              {(daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>}              
-            </div>
+            </div> */}
+            {(daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>}              
   
-            <div className={`${s.column} ${s.recentRoom}`}>  
-              <div className={s.row}>
-                <span className={s.headsection}>Recent Room</span>
-              </div>  
-              <div className={`${s.row} ${s.wrap}`}>  
-              {/* {`Recent or latest room`} */}                
-                {
-                  daRoom.map((e,i)=>{
-                    return(
-                      <div className={`${s.column} ${s.room}`} key={i} >
-                        <div className={s.row}>
-                          <div className={s.headtxt}>
-                            <span>{e.nama}</span>
-                          </div>
-                        </div>
-                        <div className={s.row}>
-                          <span className={s.txt}>
-                            {e.deskripsi}
-                          </span>
-                        </div>
-                        <div className={s.row}>
-                          <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>More</button>
-                        </div>
-                      </div>
-                    )
-                  })
-                }                
-              </div>
-  
-            </div>
+            {(daRoom.length === 0 || daRoom === undefined) ? null : <Recent daRoom={daRoom} atMore={atMore}></Recent>}
   
           </main>
   

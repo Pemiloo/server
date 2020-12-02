@@ -45,16 +45,16 @@ const Register = () => {
     <div className={s.container}>
       <div className={`${s.form}`}>
         <form>
-          <p className={s.label}>Your Email</p>
+          <p className={s.label}>Email</p>
           <input onChange={(e)=>{setMail(e.target.value)}} type="email" name="email" id="email" className={s.input} placeholder="Enter your email" autoComplete="off" required={true} />
 
-          <p className={s.label}>Your Password</p>
+          <p className={s.label}>Password</p>
           <input onChange={(e)=>{setPass(e.target.value)}} type="password" name="password" id="password" className={s.input} placeholder="Enter your password" autoComplete="off" required={true} />
 
-          <div className={s.formFeature}>
+          {/* <div className={s.formFeature}>
             <input type="checkbox" name="check" id="check" className={s.checkbox} required={true} /> 
             <span className={s.txt}>I am certify that email still active </span>
-          </div>
+          </div> */}
 
           <input onClick={(e)=>{atClick(e)}} name="register" id="register" className={s.btn} type="submit"></input>
         </form>

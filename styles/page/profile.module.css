@@ -6,15 +6,15 @@
 .containerFluid{
     display: flex;
     justify-content: center;
-    margin: 150px auto;
+    margin: 40px auto;
     padding: 0 30px;
 }
 
 .column1{
-    background: #F4F4F4;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border-radius: 8px 0px 0px 8px;
+    margin-right: 10px;
+    /* background: #F4F4F4; */
+    border: 1px solid rgba(0, 0, 0, 0.213);    
+    border-radius: 5px;
     width: 250px;
     height: 200px;
     display: flex;
@@ -22,9 +22,9 @@
 }.bg{width: 100%;}
 
 .column1 .txtCol{
-    color: #333333;
+    color: dimgray;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;    
     padding: 12px 0;
     padding-left: 30px;
     box-sizing: border-box;
@@ -35,19 +35,15 @@ p.txtCol{margin: 0;}
     cursor: pointer;
     background: rgba(144, 144, 144, 0.1);
     box-shadow: inset 3px 0px 0px #5096D7;
-    box-sizing: border-box;
-    
+    box-sizing: border-box;   
 }
 
-.column2{
-    background: #F4F4F4;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border-radius: 0px 8px 8px 8px;
+.column2{    
+    border: 1px solid rgba(0, 0, 0, 0.309);
+    /* box-sizing: border-box; */
+    border-radius: 5px;
     width: 500px;
-    padding: 30px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    padding: 30px;    
 }
 
 @media screen and (max-width: 760px){
@@ -55,19 +51,17 @@ p.txtCol{margin: 0;}
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        margin: 100px auto;
-        padding: 30px;
+        margin: 10px auto;
+        padding: 10px;
     }
 
     .column1{
         width: 100%;
-        border-radius: 8px;
+        margin-right: 0px;        
     }
 
     .column2{
         margin-top: 10px;
-        width: 100%;
-        padding: 30px;
-        border-radius: 8px;
+        width: 100%;                
     }
 }

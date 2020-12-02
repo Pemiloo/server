@@ -3,10 +3,13 @@ import st from '../../../styles/components/setting/edit.module.css';
 
 import { getAdmin, updateAdmin } from '../../../api';
 import useSWR, { mutate } from 'swr';
+import { useRouter } from 'next/router';
 
 const EditProfile = ({email}) => {
 
-  const {data} = useSWR(`/api/profile/${email}`, ()=>{ return getAdmin(email) });  
+  const router = useRouter();
+
+  const {data} = useSWR(`/api/profile/`, ()=>{ return getAdmin(email) });  
 
   const [newOrg, setNewOrg] = useState("");
   const [newCom, setNewCom] = useState([]);
@@ -24,8 +27,9 @@ const EditProfile = ({email}) => {
   const atSave = async () => {
     if(newOrg != "" && newCom != ""){
       const res = await updateAdmin(email, newCom, data.linkPhoto, newOrg);
-      (res) ? alert("Berhasil") : alert("Gagal");
-      mutate(`/api/profile/${email}`);
+      if(res){
+        router.push(`/page/${email}/dashboard`);
+      }
     }
   }
 
@@ -63,7 +67,7 @@ const EditProfile = ({email}) => {
             </div>
               
             <div className={st.containerIcon}>
-              <img src="/icon/VectorPlus.svg" height="25px" onClick={newComPlus} />
+              <img src="/icon/VectorPlus.svg" height="20px" onClick={newComPlus} />
             </div>
   
             <button onClick={atSave} name="save" id="save" className={st.btn} >Save</button>

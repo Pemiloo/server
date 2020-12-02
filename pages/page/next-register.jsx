@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import style from '../../styles/page/next-register.module.css';
 
 import { useRouter } from 'next/router';
@@ -21,9 +21,15 @@ const nextRegister = () => {
   const [com, setCom] = useState([""]);
 
   const [photo, setPhoto] = useState("");
-  const [alt, setAlt] = useState("");
+  const [alt, setAlt] = useState("");  
 
-  const [agg, setAgg] = useState(false);
+  const [staPhoto, setStaPhoto] = useState(true);
+
+  useEffect(()=>{
+    if(registerNext.mail == ""){
+      router.push("/page/auth");
+    }
+  },[registerNext]);
 
   const addCommite = (key = 0, value = "") => {
     const tm = com;
@@ -37,12 +43,15 @@ const nextRegister = () => {
 
   const atUpload = (e) => {    
 
+    setStaPhoto(false);
+
     const res = uploadFile(e);
     
     fetch('https://api.cloudinary.com/v1_1/kotakjualan/image/upload', res)
     .then(res => res.json())
     .then(res => {
       console.log(res)
+      setStaPhoto(true);
       setPhoto(res.secure_url);
       setAlt(`An image of ${res.original_filename}`);
     })
@@ -50,9 +59,8 @@ const nextRegister = () => {
 
   }
 
-  const ceState = () => {
-    console.log(agg);
-    if(agg === true && org != "" && photo != "" && alt != ""){
+  const ceState = () => {    
+    if(org != "" && photo != "" && alt != ""){
       return true;
     }
     else return alert("Field harus di isi dengan benar!");
@@ -67,9 +75,7 @@ const nextRegister = () => {
         router.push('/page/auth');
       }
     }
-  }
-
-  console.log("Render Register");
+  }  
 
   return(
     <> 
@@ -109,20 +115,24 @@ const nextRegister = () => {
                   }
                   
                   <div className={style.containerIcon} onClick={commitePlus}>
-                    <img src="/icon/VectorPlus.svg" height="25px"  />
+                    <img src="/icon/VectorPlus.svg" height="20px"/>
                   </div>
 
                   <div className={style.pictureContainer}>
                     
-                    <label>Organization Picture</label><br />
-                    <span className={style.pInfo}>Attach your Organization profile picture</span>
-                    <input onChange={(e)=>{atUpload(e.target.files[0])}} type="file" name="picture" id="picture" />
+                  <label>Organization Picture</label><br />                  
+                  {/* <span className={style.pInfo}>Attach your Organization profile picture</span> */}                    
+                  <input onChange={(e)=>{atUpload(e.target.files[0])}} type="file" name="picture" id="picture" />
+                    {
+                      (staPhoto) ? null : <span>Loading..</span>
+                    }                    
 
-                    <p>
+                    {/* <p>
                       <input onChange={(e)=>{setAgg(!agg)}} type="checkbox" name="check" id="check" required={true} className={style.checkbox} /><span className={style.pInfoCheck}>i am certify that all is true and complete</span>
-                    </p>
-
-                    <input onClick={(e)=>{atDone(e)}} type="submit" name="done" id="done" className={style.btn} value="Done"/>
+                    </p> */}
+                    <div className={style.btnContent}>
+                      <input onClick={(e)=>{atDone(e)}} type="submit" name="done" id="done" className={style.btn} value="Done"/>
+                    </div>
 
                   </div>
 

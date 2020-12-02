@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import st from '../../../styles/components/setting/change.module.css';
 
 import { getAdmin, updateAdminPass } from '../../../api';
@@ -7,7 +6,7 @@ import useSWR, { mutate } from 'swr';
 
 const ChangePass = ({email}) => {
 
-  const {data} = useSWR(`/api/profile/${email}`, ()=>{ return getAdmin(email) });  
+  const {data} = useSWR(`/api/profile/`, ()=>{ return getAdmin(email) });  
 
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
@@ -44,11 +43,7 @@ const ChangePass = ({email}) => {
               <input onChange={(e)=>{setNewPass(e.target.value)}} value={newPass} type="text" name="new" id="new" placeholder="Enter new password" className={st.input} /><p />
 
               <label className={st.label}>Confirm Password</label>
-              <input onChange={(e)=>{setConPass(e.target.value)}} value={conPass} type="text" name="confirm" id="confirm" placeholder="Enter confirm password" className={st.input} />
-
-              <Link href="#">
-                <p className={st.forgot}>Forgot your password</p>
-              </Link>                    
+              <input onChange={(e)=>{setConPass(e.target.value)}} value={conPass} type="text" name="confirm" id="confirm" placeholder="Enter confirm password" className={st.input} />              
 
               <input onClick={atSave} type="submit" name="save" id="save" value="Save" className={st.btn} />
 

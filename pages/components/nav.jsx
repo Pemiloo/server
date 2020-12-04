@@ -1,11 +1,24 @@
 import s from '../../styles/components/nav.module.css'
 import useSWR from 'swr'
 
-import { getAdmin } from '../../api';
+import {useContext} from 'react';
+import {getAdmin} from '../../api';
+import {useRouter} from 'next/router';
+import {StatePatch, Action} from '../../lib';
+
+const {CREATEROOM} = Action
 
 const Nav = ({email}) => {  
 
-  console.log("Render Nav");
+  const router = useRouter();
+
+  const Cont = useContext(StatePatch);
+
+  const Disp = Cont.dispatch;
+
+  const atClickRoom = () => {
+    Disp({tipe:CREATEROOM});
+  }
 
   const {data} = useSWR(`/api/profile/${email}`, ()=>{ return getAdmin(email) });    
 
@@ -14,21 +27,21 @@ const Nav = ({email}) => {
       <div className={s.containerFluid}>
         <div className={s.container}>
   
-          <div className={s.logo}>
+          <div className={s.logo} onClick={()=>{router.push(`/page/${email}/dashboard`);}}>
             <img src="/logo.svg" alt="logo pemilo"/>
           </div>
           <div className={s.navMenu}>
   
             <div className={s.menuList}>
-              <div className={s.menu}>
-                <span>Room</span>
+              <div className={s.menu} onClick={atClickRoom}>
+                <span>Room (+)</span>
               </div>
-              <div className={s.menu}>
+              {/* <div className={s.menu} onClick={atClickRoom}>
                 <img src="/icon/plus.svg" alt="icon plus"/>
-              </div>
+              </div> */}
             </div>
   
-            <div className={s.profile}>              
+            <div className={s.profile} onClick={()=>router.push(`/page/${email}/profile`)}>              
               <img src={(data.linkPhoto != "")?data.linkPhoto:"/pemilo.svg"} alt="profile"></img>
             </div>
   

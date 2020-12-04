@@ -7,13 +7,14 @@
 }
 .row{
   display: flex;
-  flex-direction: row;
+ 
   width: 100%;
 }
 .column{
   display: flex;
   flex-direction: column;
   width: 100%;
+
 }
 .flex{
   display: flex;
@@ -29,13 +30,14 @@
 .headpage{
   font-size: xx-large;
   font-weight: 700;
-  margin: 40px 0;
+  margin: 25px 0;
   color: #333333;
 }
 .headsection{
   font-size: xx-large;
   font-weight: 700;
-  color: #6EADE8;
+  padding-bottom: 10px;
+  /* color: #6EADE8; */
 }
 .headtxt{
   font-size: x-large;
@@ -46,23 +48,41 @@
    display: -webkit-box;
    -webkit-line-clamp: 2;
    -webkit-box-orient: vertical;
+   display: flex;
+   justify-content: space-between;
+ 
 }
+
+.res{
+  display: flex;
+}
+
+.headtxt img{
+  float: right;
+}
+
+.headtxt img:hover{
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
 .subheadtxt{
   font-size: large;
-  font-weight: 600;
+  /* font-weight: 600; */
   color: #333333;
 }
 .txt{
   font-size: medium;
   color: #333333;
-  font-weight: 500;
+  font-weight: 2s00;
   overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-line-clamp: 4; /* number of lines to show */
    -webkit-box-orient: vertical;
 }
-.wrap{flex-wrap: wrap;} main.row{margin-bottom: 35px;}
+.wrap{flex-wrap: wrap; margin-top: 15px;margin-bottom: 5px;} main.row{margin-bottom: 35px;}
 
 .info{  /*custom selector*/
   width: 60%;
@@ -72,10 +92,11 @@
   width: 22%;
 }
 .info .column{
+
   padding: 10px 0px;
-  background-color: #f6f6f6;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  /* background-color: #f6f6f6; */
+  border: 1px solid rgba(0, 0, 0, 0.363);
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -98,9 +119,9 @@
   padding-left: 15px;
 }
 .detail{
-  margin-top: 17px;
+  /* margin-top: 17px; */
   width: 100%;
-  background-color: #f6f6f6;
+  /* background-color: #f6f6f6; */
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   border-radius: 8px;
@@ -108,16 +129,14 @@
 }
 .room .txt{margin-top: 5px;}
 .candidates{margin-top: 15px;}
-select.select{
-  width: 40%;
-  height: 100%;
-  background-color: #FAFAFA;
-  border: 2px solid #5096D7;
+select.select{    
+  background-color: #FFFFFF;
+  border: 2px solid dimgray;
   outline: none;
-  border-radius: 8px;
-  font-weight: 600;
-  color: #5096D7;
-  padding: 2px 6px;
+  border-radius: 5px;
+  font-weight: 200;
+  /* color: #5096D7; */
+  padding: 5px 10px;
   cursor: pointer;
 }
 .candidate{margin-top: 10px; width: 50%;}
@@ -133,15 +152,18 @@ select.select{
 .candidate .column{
   justify-content: center;
   padding: 5px 10px;
+  margin: 5px;
 }
-.candidate .txt{-webkit-line-clamp: 1;}
+.candidate .txt{
+  margin-bottom: 3px;
+  -webkit-line-clamp: 1; font-weight: 300;font-size: normal;}
 .btnRoom{
   margin-top: 15px;
   border-radius: 6px;
   outline: none;
   border: 1px solid #5096D7;
   background-color: #ffffff;
-  padding: 5px 10px;
+  padding: 10px 12px;
   margin-right: 15px;
   cursor: pointer;
   color: #5096D7;
@@ -154,16 +176,66 @@ select.select{
 .recentRoom{ /*custom selector*/
   width: 100%;
 }
+
+.btnCon{
+  margin-top: 15px;
+}
+
+
+.btnLogout{  
+  border: 2px solid #D75050;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100px;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  color: #D75050;
+  outline: none;  
+}
+
+.btnLogout:hover{
+  background-color: #D75050;
+  color: #F4F4F4;
+  cursor: pointer;
+}
+
+.column3{
+  margin: 6px;
+}
+
 button.expand{
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 30px;
+  padding: 5px 20px;
   color: #FAFAFA;
   background-color: #6EADE8;
   border: none; outline: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
 } button.expand:hover{background-color: #5096D7;}
-.recentRoom .room{margin-top: 20px; width: 33.33%; padding-right: 15px;}
+.recentRoom .room{
+  margin-top: 20px; 
+  width: 32.32%; 
+  background-color: #FFFFFF;
+  border: 2px solid #f0f0f0;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.wrapFile{
+  padding-bottom: 25px;
+}
+
+.wrapFile label{
+  font-size: medium;  
+  font-weight: 300;
+}
+
+.wrapFile input{
+  margin-top: 10px;
+}
 
 @media screen and (max-width : 1400px){ /*responsive selector*/
   .containerFluid{padding: 75px 40px 0;}

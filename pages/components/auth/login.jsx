@@ -47,16 +47,16 @@ const Login = () => {
     <>
     <div className={s.container}>
       <div className={`${s.form}`}>
-        <p className={s.label}>Your Email</p>
         <form>
+          <p className={s.label}>Email</p>
           <input onChange={(e)=>{setMail(e.target.value)}} type="email" name="email" id="email" className={s.input} placeholder="Enter your email" autoComplete="off" required={true} />
 
-          <p className={s.label}>Your Password</p>
+          <p className={s.label}>Password</p>
           <input onChange={(e)=>{setPass(e.target.value)}} type="password" name="password" id="password" className={s.input} placeholder="Enter your password" autoComplete="off" required={true} />
 
-          <div className={s.formFeature}>
+          {/* <div className={s.formFeature}>
             <span className={s.txt} href="#">Forgot your password?</span>
-          </div>
+          </div> */}
 
           <input onClick={(e)=>{atClick(e)}} type="submit" name="login" id="login" value="Login" className={s.btn}/>        
         </form>

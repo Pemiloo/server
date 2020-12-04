@@ -1,45 +1,33 @@
 .containerFluid{
-  width: 100%;
-  padding: 75px 25px 0;
+  width: 100%;  
+  padding-top: 100px;
 }
 
-.containerForm{
-  padding: 30px;
-  background-color: #F4F4F4;
-  max-width: 500px;
+.containerForm{  
+  max-width: 400px;
   width: 100%;
-  margin: auto;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  margin: auto;  
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); */
   border-radius: 6px;
-  padding-bottom: 40px;
-  margin-top: 60px; margin-bottom: 60px;
+  padding-bottom: 40px;  
 }
 
 .input{
   width: 100%;
-  border-radius: 5px;
-  height: 35px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 15px 0px;
+  border-radius: 4px;      
+  padding: 10px 0px;
   padding-left: 10px;
-  border: 1px solid #909090;
-  color: #909090;
-  background: #FAFAFA;
-  margin-top: 10px;
+  border: 1px solid #909090;    
   outline: none;
-  font-weight: 600;
-  font-size: x-large;
-  line-height: 28px;
-  text-align: center;
+  margin-top: 5px;    
 }
 
 .input:focus{border: 2px solid #5096D7;background-color: #fff; color: #333333}
-
+.box100{width: 100%;}
 .box{width: 48%;}
-.box .input{
-  width: 100%;
-  font-weight: 500; font-size: large;
+.box .input, .box100 .input{
+  width: 100%;  
+  margin-top: 10px;
 }
 
 .box .input:focus{border: 2px solid #5096D7;background-color: #fff; color: #333333;}
@@ -55,9 +43,9 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
+.candidateImg .imgCam{margin-top:  115px;margin-left: -35px;}
 .candidateImg .imgThumb:hover{cursor: pointer; border: 1px solid #5096D7;}
 .candidateImg .imgCam:hover{cursor: pointer; opacity: 0.8;}
-.candidateImg .imgCam{margin-top:  115px;margin-left: -35px;}
 
 .containerForm .candidateDetail{
   margin-top: 5%;
@@ -67,19 +55,18 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  padding-top: 10px;
-  text-align: center;
+  padding-top: 10px;  
 }
 
-.box label{
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  color: #5096D7;
+.box label , .box100 label{    
+  font-size: 20px;  
+  font-weight: 100;
+  /* color: #5096D7; */
 }
 
 .vision{margin-top: 10px;}
-.vision label{font-weight: bold;font-size: 24px;}
+.vision label{font-size: 20px;  
+  font-weight: 100;}
 textarea.textarea{
   width: 100%;
   border-radius: 5px;
@@ -87,8 +74,6 @@ textarea.textarea{
   border-radius: 5px;
   padding: 10px;
   border: 1px solid #909090;
-  color: #909090;
-  background: #FAFAFA;
   margin-top: 10px;
   resize:vertical;
   min-height: 40px;
@@ -103,22 +88,28 @@ textarea.textarea{
 }
 
 .mision{margin-top: 10px;}
-.mision label{font-weight: bold; font-size: 24px;}
-.mision .input{font-weight: 500; font-size: large; text-align: start;}
+.mision label{font-size: 20px;  
+  font-weight: 100;}
+.mision .input{margin-top: 10px; font-weight: 500; font-size: normal; text-align: start;}
 .Btn{ 
   width: 100%; 
   margin-top: 15px; 
   padding: 8px 0px; 
-  font-weight: 600; 
-  font-size: medium;
-  border: 2px solid #5096D7;
+  font-weight: bold; 
+  font-size: medium;  
+  border: none; 
   background-color: #fff; 
   color: #5096D7;
-  border-radius: 9px;
+  border-radius: 5px;
   cursor: pointer;
 }.Btn:hover{box-shadow: 0px 0px 100px inset  rgba(0, 0, 0, 0.04);}
 
-.submitCandidate > .Btn {width: auto; padding: 10px 14px; color: #fff; background-color: #6EADE8;}
+.submitCandidate > .Btn {  
+  padding: 10px 25px;
+  width: auto;  
+  color: #fff;   
+  background-color: #6EADE8;
+}
 
 @media screen and (max-width: 900px){
   .containerFluid{padding: 65px 30px 0;}

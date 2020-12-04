@@ -1,36 +1,36 @@
 import s from '../../../styles/page/dashboard.module.css'
 import Nav from '../../components/nav';
 import Head from 'next/head';
-import useSWR from 'swr';
-
-import { Line } from 'react-chartjs-2';
-import { getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
-import { useEffect, useState } from 'react';
-import { get } from '../../../lib';
-import { Router, useRouter } from 'next/router';
+import useSWR, { mutate } from 'swr';
 import EditRoom from '../../components/edit-room';
 import CreateRoom from '../../components/create-room';
 
-const generateData = () => {
-  return Math.round(Math.random() * 100);
-}
+import {Line } from 'react-chartjs-2';
+import {useRouter} from 'next/router';
+import {StatePatch, Action} from '../../../lib';
+import React, {useEffect, useState, useContext} from 'react';
+import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate, deleteRoom } from '../../../api';
+import { uploadFileXl } from '../../../lib';
+import { delAll } from '../../../lib';
 
-const CandidateSection = ({room, position = "Ketua"}) => {
+const {EDITROOM} = Action;
+
+const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
 
   const {data} = useSWR(`/api/CandidateSection/${room}/${position}`, ()=>{ return getCandidate(room, position) });
 
   if(data != undefined){
-    return(
+    return( 
       <>
       {
         data.map((e,i)=>{
           return(
-            <div className={s.candidate} key={i}>
+            <div className={s.candidate} key={i} onClick={()=>{onClick(e.id)}}>
               <div className={s.row}>
                 <img src={e.photo} alt={"Photo"}/>
                 <div className={s.column}>
                   <span className={s.txt}>{e.name}</span>
-                  <span className={s.txt}>{`Kelas ${e.classroom}`}</span>
+                  <span className={s.txt}>{`${e.classroom}`}</span>
                 </div>
               </div>
             </div>
@@ -57,11 +57,59 @@ const EndSection = ({data}) => {
   );
 }
 
-const Desc = ({datRoom, email}) => {  
+const Recent = ({daRoom, atMore}) => {
 
   const router = useRouter();
 
-  const [op, setOp] = useState("Ketua");
+  const atDelete = async (room = "") => {
+    console.log(room);
+    await deleteRoom(room);
+    // router.reload();
+  }
+
+  return(
+    <div className={`${s.column} ${s.recentRoom}`}>  
+      <div className={s.row}>
+        <span className={s.headsection}>List Room</span>
+      </div>  
+      <div className={`${s.row} ${s.wrap}`}>  
+      {/* {`Recent or latest room`} */}                
+        {
+          daRoom.map((e,i)=>{
+            return(
+              <div className={`${s.column} ${s.room} ${s.column3}`} key={i} >
+                <div className={`${s.headtxt}`}>
+                  <span>{e.nama}</span>
+                      <img onClick={()=>{atDelete(e.codeRoom)}} src="/icon/close.svg" height="25px" />
+                  </div>
+                <div className={s.row}>
+                  <span className={s.txt}>
+                    {e.deskripsi}
+                  </span>
+                </div>
+                <div className={s.row}>
+                  <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>more</button>
+                </div>
+              </div>
+            )
+          })
+        }                
+      </div>
+
+    </div>
+  );
+}
+
+const Desc = ({datRoom, email}) => {  
+
+  const Cont = useContext(StatePatch);
+
+  const Disp = Cont.dispatch;
+
+  const router = useRouter();
+
+  const [op, setOp] = useState("Ketua");  
+  const [staForm, setStaForm] = useState(true);
 
   const { data } = useSWR('/api/option', ()=>{ return getOption('position') });
 
@@ -69,68 +117,111 @@ const Desc = ({datRoom, email}) => {
     router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
   }
 
+  const atEditCandidate = (id) => {
+    router.push(`/page/${email}/${datRoom.codeRoom}/${id}/edit-candidate`);
+  }
+
+  const atChangeFileForm = (file) => {        
+    setStaForm(false);      
+    const op = uploadFileXl(file, datRoom.codeRoom);
+    fetch('http://34.101.95.115/v1/anggota/uploads', op)
+    .then(res => res.json())
+    .then(res => {
+      setStaForm(true);
+      alert("Selesai Upload");        
+      mutate(`/api/countTab/${email}/${datRoom.codeRoom}`);
+    })
+    .catch(err => console.log(err));
+  }
+
+  const atLogOut = () => {    
+    delAll();
+    router.push(`/page/auth`);
+  }
+
+  const atEditRoom = () => {
+    Disp({tipe:EDITROOM});
+  }
+
   return(
-    <div className={`${s.column} ${s.detail}`}>  
-    {/* {`room title and description`} */}
-      <div className={`${s.column} ${s.room}`}>
-        <div className={s.row}>
-          <div className={s.headtxt}>
-            <span>{datRoom.nama}</span>
+    <div className={`${s.column} ${s.detailRoom}`}>      
+
+      <div className={`${s.column} ${s.detail}`}>  
+      {/* {`room title and description`} */}
+        <div className={`${s.column} ${s.room}`}>
+          <div className={s.row}>
+            <span className={s.headsection}>Detail Room</span>
+          </div>
+          <div className={s.row}>
+            <div className={s.headtxt}>
+              <span>{datRoom.nama}</span>
+            </div>
+          </div>
+
+          <div className={s.row}>
+            <span className={s.txt}>
+              {datRoom.deskripsi}
+            </span>
           </div>
         </div>
 
-        <div className={s.row}>
-          <span className={s.txt}>
-            {datRoom.deskripsi}
-          </span>
-        </div>
-      </div>
-
-    {/* {`candidate and position`} */}
-      <div className={`${s.column} ${s.candidates}`}>
-        <div className={s.flex}>
-          <div className={s.subheadtxt}>
-            <span>Candidate</span>
+      {/* {`candidate and position`} */}
+        <div className={`${s.column} ${s.candidates}`}>
+          <div className={s.flex}>
+            <div className={s.subheadtxt}>
+              <span>Candidate</span>
+            </div>
+            <select onChange={(e)=>{setOp(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
+              <option value="" disabled hidden>Position...</option>
+              {
+                ((data != undefined) ? data : []).map((e,i)=>{
+                  return(
+                    <option key={i} value={e}>{e}</option>                    
+                  )
+                })
+              }
+            </select>
           </div>
-          <select onChange={(e)=>{setOp(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
-            <option value="" disabled hidden>Position...</option>
-            {
-              ((data != undefined) ? data : []).map((e,i)=>{
-                return(
-                  <option key={i} value={e}>{e}</option>                    
-                )
-              })
-            }
-          </select>
-        </div>
-        <div className={`${s.row} ${s.wrap}`}>
-          {/* Bagian untuk Candidate Section*/}
-          <CandidateSection room={datRoom.codeRoom} position={op}></CandidateSection>
-        </div>
-        <div className={`${s.row} ${s.wrap}`}>
+          <div className={`${s.row} ${s.wrap}`}>
+            {/* Bagian untuk Candidate Section*/}
+            <CandidateSection onClick={atEditCandidate} room={datRoom.codeRoom} position={op}></CandidateSection>
+          </div>
+          <div className={`${s.row} ${s.wrap}`}>
 
-          <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>add candidate</button>
-          <button className={`${s.txt} ${s.btnRoom}`}>edit room</button>
-          <div className={`${s.txt} ${s.btnRoom}`}>                    
-            <label> Room Code </label>
-            <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
+            <button onClick={atAddCandidate} className={`${s.txt} ${s.btnRoom}`}>Add Candidate (+)</button>
+            {/* <button onClick={atEditRoom} className={`${s.txt} ${s.btnRoom}`}>Edit Room</button> */}
+            <div className={`${s.txt} ${s.btnRoom}`}>                    
+              <label> Room Code </label>
+              <input name={"RoomCode"} id={"roomCode"} className={`${s.txt}`} value={datRoom.codeRoom} readOnly />
+
+             
+            </div>
+
           </div>
 
-        </div>
-      </div>
-
-    {/* {`status room start till end`} */}
-      <div className={`${s.column} ${s.status}`}>
-        <div className={s.row}>
-          <div className={`${s.column}`}>
-            <span className={s.subheadtxt}>Start</span>
-            <span className={s.txt}>{ datRoom.start }</span>
+          <div className={s.btnCon}>
+            <div className={s.wrapFile}>
+              <label>Participant</label><br></br>
+              {
+                (staForm) ? <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }}/> : <span>Loading..</span>
+              }              
+            </div>
+            <button className={s.btnLogout} onClick={atLogOut} >Logout</button>
           </div>
         </div>
-        {
-          (datRoom.end != undefined) ? <EndSection data={datRoom.end} ></EndSection> : null
-        }
-        
+
+      {/* {`status room start till end`} */}
+        {/* <div className={`${s.column} ${s.status}`}>
+          <div className={s.row}>
+            <div className={`${s.column}`}>
+              <span className={s.subheadtxt}>Start</span>
+              <span className={s.txt}>{ datRoom.start }</span>
+            </div>
+          </div>
+          {
+            (datRoom.end != undefined) ? <EndSection data={datRoom.end} ></EndSection> : null
+          }        
+        </div> */}
       </div>
     </div>
   )
@@ -147,38 +238,126 @@ const bulkOperation = async (email = "", room = "") => {
 
 export async function getServerSideProps(context){
 
-  const { email } = context.params;
+  const { email } = context.params;  
+  const daRoom = await getListRoom(email);
+
+  //console.log(daRoom);
 
   return{
     props:{
-      parMail : email
+      parMail : email,
+      daRoom,
     }
   }
 }
 
-const Dashboard = ({parMail}) => {
+const generateData = () => {
+  return Math.round(Math.random() * 100);
+}
+
+const dataGrap = {
+  labels: [['June', '2015'], 'July', 'August', 'September', 'October', 'November', 'December', ['January', '2016'], 'February', 'March', 'April', 'May'],
+  datasets: [
+    {
+      label: 'My First dataset',
+      fill: false,
+      lineTension: 0.3,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+          generateData(),
+      ]
+    },
+    {
+      label: 'My Second dataset',
+      fill: false,
+      lineTension: 0.3,
+      backgroundColor: 'rgb(192,75,186)',
+      borderColor: 'rgb(171,75,192)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgb(180,75,192)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+        generateData(),
+      ]
+    }
+  ]
+};
+
+const Dashboard = React.memo(({parMail, daRoom}) => {
+
+  const Cont = useContext(StatePatch);
+
+  const Stat = Cont.state;
 
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
-  const [index, setIndex] = useState(0);  
+  console.log(daRoom);
 
-  const listRoom = useSWR(`/api/listRoom/${mail}`, ()=>{ return getListRoom(mail)});
+  const [index, setIndex] = useState(0);    
 
   useEffect(()=>{    
-    if(listRoom.data != undefined){
-      setRoom(listRoom.data[0].codeRoom);
-    }
-  },[listRoom.data]);
+    if(daRoom[0]  != undefined){
+      setRoom(daRoom[0].codeRoom);    
+    }else{
+      setRoom(daRoom);    
+    }    
+  },[]);
 
   const { data } = useSWR(`/api/countTab/${mail}/${room}`, ()=>{ return bulkOperation(mail, room) });      
   
   const atMore = (ix = 0, newRoom = "") => {
     setIndex(ix);
     setRoom(newRoom);
-  }
+  }  
   
-  if(data != undefined && listRoom.data != undefined){
+  if(data != undefined && daRoom != undefined){
     return(
       <> 
         <Head>
@@ -187,14 +366,22 @@ const Dashboard = ({parMail}) => {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="icon" href="/pemilo.svg" />
         </Head>
+        
         <Nav email={parMail}></Nav>
-        {/* <CreateRoom></CreateRoom> */}
-        {/* <EditRoom></EditRoom> */}
+        
+        {
+          (Stat.doubleModalRoom.create === true) ? <CreateRoom email={parMail}></CreateRoom> : null
+        }
+
+        {
+          (Stat.doubleModalRoom.edit === true) ? <EditRoom email={parMail} ></EditRoom> : null
+        }
+
         <div className={s.containerFluid}>
   
           <div className={s.row}>
             <div className={s.headpage}>
-              <span>Dashboard</span>
+              <span>DASHBOARD</span>
             </div>
           </div>
   
@@ -207,15 +394,15 @@ const Dashboard = ({parMail}) => {
                 
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame participant.svg"} alt={"participant-icon"}/>
+                    {/* <img src={"/icon/Frame participant.svg"} alt={"participant-icon"}/> */}
                     <span className={s.headtxt}>{ (data[0] === undefined) ? 0 : data[0] }</span>
-                    <span className={s.txt}>participant</span>
+                    <span className={s.txt}>Participant</span>
                   </div>
                 </div>
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame room.svg"} alt={"room-icon"}/>
+                    {/* <img src={"/icon/Frame room.svg"} alt={"room-icon"}/> */}
                     <span className={s.headtxt}>{data[1]}</span>
                     <span className={s.txt}>Room Total</span>
                   </div>
@@ -223,7 +410,7 @@ const Dashboard = ({parMail}) => {
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame active.svg"} alt={"roomActive-icon"}/>
+                    {/* <img src={"/icon/Frame active.svg"} alt={"roomActive-icon"}/> */}
                     <span className={s.headtxt}>{data[2]}</span>
                     <span className={s.txt}>Room Active</span>
                   </div>
@@ -231,7 +418,7 @@ const Dashboard = ({parMail}) => {
   
                 <div className={s.col}>
                   <div className={s.column}>
-                    <img src={"/icon/Frame expire.svg"} alt={"roomExpire-icon"}/>
+                    {/* <img src={"/icon/Frame expire.svg"} alt={"roomExpire-icon"}/> */}
                     <span className={s.headtxt}>{data[3]}</span>
                     <span className={s.txt}>Room Expired</span>
                   </div>
@@ -241,58 +428,19 @@ const Dashboard = ({parMail}) => {
             {/* {`graph room while running`} */}
               <div className={s.graphRoom}>
                 {/* split code graph */}
-                {/* <Line data={data} /> */}
+                <Line data={dataGrap} />
               </div>
   
             </div>
   
-            <div className={`${s.column} ${s.detailRoom}`}>
-  
+            {/* <div className={`${s.column} ${s.detailRoom}`}>
               <div className={s.row}>
                 <span className={s.headsection}>Detail Room</span>
               </div>
-
-              {
-                (listRoom.data[index] === undefined ) ? null : <Desc datRoom={listRoom.data[index]} email={parMail} ></Desc>
-              }              
+            </div> */}
+            {(daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>}              
   
-            </div>
-  
-            <div className={`${s.column} ${s.recentRoom}`}>
-  
-              <div className={s.row}>
-                <span className={s.headsection}>Recent Room</span>
-              </div>
-  
-              <div className={`${s.row} ${s.wrap}`}>
-  
-              {/* {`Recent or latest room`} */}
-                
-                {
-                  listRoom.data.map((e,i)=>{
-                    return(
-                      <div className={`${s.column} ${s.room}`} key={i} >
-                        <div className={s.row}>
-                          <div className={s.headtxt}>
-                            <span>{e.nama}</span>
-                          </div>
-                        </div>
-                        <div className={s.row}>
-                          <span className={s.txt}>
-                            {e.deskripsi}
-                          </span>
-                        </div>
-                        <div className={s.row}>
-                          <button onClick={()=>{atMore(i, e.codeRoom)}} className={`${s.expand} ${s.subheadtxt}`}>More</button>
-                        </div>
-                      </div>
-                    )
-                  })
-                }              
-  
-              </div>
-  
-            </div>
+            {(daRoom.length === 0 || daRoom === undefined) ? null : <Recent daRoom={daRoom} atMore={atMore}></Recent>}
   
           </main>
   
@@ -304,5 +452,5 @@ const Dashboard = ({parMail}) => {
     return null;
   }
 
-}
-export default Dashboard
+});
+export default Dashboard;

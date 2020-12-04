@@ -9,13 +9,13 @@ import {Line } from 'react-chartjs-2';
 import {useRouter} from 'next/router';
 import {StatePatch, Action} from '../../../lib';
 import React, {useEffect, useState, useContext} from 'react';
-import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate } from '../../../api';
+import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate, deleteRoom } from '../../../api';
 import { uploadFileXl } from '../../../lib';
 import { delAll } from '../../../lib';
 
 const {EDITROOM} = Action;
 
-const CandidateSection = ({room, position = "Ketua"}) => {
+const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
 
   const {data} = useSWR(`/api/CandidateSection/${room}/${position}`, ()=>{ return getCandidate(room, position) });
 
@@ -25,7 +25,7 @@ const CandidateSection = ({room, position = "Ketua"}) => {
       {
         data.map((e,i)=>{
           return(
-            <div className={s.candidate} key={i}>
+            <div className={s.candidate} key={i} onClick={()=>{onClick(e.id)}}>
               <div className={s.row}>
                 <img src={e.photo} alt={"Photo"}/>
                 <div className={s.column}>
@@ -58,6 +58,15 @@ const EndSection = ({data}) => {
 }
 
 const Recent = ({daRoom, atMore}) => {
+
+  const router = useRouter();
+
+  const atDelete = async (room = "") => {
+    console.log(room);
+    await deleteRoom(room);
+    // router.reload();
+  }
+
   return(
     <div className={`${s.column} ${s.recentRoom}`}>  
       <div className={s.row}>
@@ -71,7 +80,7 @@ const Recent = ({daRoom, atMore}) => {
               <div className={`${s.column} ${s.room} ${s.column3}`} key={i} >
                 <div className={`${s.headtxt}`}>
                   <span>{e.nama}</span>
-                      <img src="/icon/close.svg" height="25px" />
+                      <img onClick={()=>{atDelete(e.codeRoom)}} src="/icon/close.svg" height="25px" />
                   </div>
                 <div className={s.row}>
                   <span className={s.txt}>
@@ -106,6 +115,10 @@ const Desc = ({datRoom, email}) => {
 
   const atAddCandidate = () => {
     router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
+  }
+
+  const atEditCandidate = (id) => {
+    router.push(`/page/${email}/${datRoom.codeRoom}/${id}/edit-candidate`);
   }
 
   const atChangeFileForm = (file) => {        
@@ -171,7 +184,7 @@ const Desc = ({datRoom, email}) => {
           </div>
           <div className={`${s.row} ${s.wrap}`}>
             {/* Bagian untuk Candidate Section*/}
-            <CandidateSection room={datRoom.codeRoom} position={op}></CandidateSection>
+            <CandidateSection onClick={atEditCandidate} room={datRoom.codeRoom} position={op}></CandidateSection>
           </div>
           <div className={`${s.row} ${s.wrap}`}>
 

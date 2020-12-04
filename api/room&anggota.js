@@ -37,7 +37,11 @@ export async function updateRoom(room = "", update = new Object()){
   return (res.res === true) ? true : false;
 }
 
-
+export async function deleteRoom(room = ""){
+  const res = await httpR.delete(`/delete`, {param:{codeRoom:room}});
+  console.log(res);
+  return res;
+}
 
 
 

@@ -10,8 +10,17 @@ export async function getCandidate(room = "", position = ""){
   return await http.post('/getAllCandidate', {room__id:room, position});
 }
 
+export async function getCandidateId(id=""){
+  return await http.post('/getAllCandidate', {id});
+}
+
 export async function addCandidate(room = "", name = "", photo = "", visi = "", misi = new Array(), position = "", kelas = ""){
   const res = await http.post('/Candidate', {codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position, classroom:kelas});
-  console.log(res);
+  //console.log(res);
+  return (res.status === 'ok') ? true : false;
+}
+
+export async function updateCandidate(id = "",room = "",name = "",photo = "", visi = "", misi = [], position = ""){
+  const res = await http.put('/Candidate', {id, codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position});
   return (res.status === 'ok') ? true : false;
 }

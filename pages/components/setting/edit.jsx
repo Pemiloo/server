@@ -53,7 +53,7 @@ const EditProfile = ({email}) => {
   
           <div className={st.wrap}>
             <label>Your Organization</label>
-            <input onChange={(e)=>{setNewOrg(e.target.value)}} type="text" name="organization" id="organization" placeholder="Your organization" className={st.input} />
+            <input onChange={(e)=>{setNewOrg(e.target.value)}} type="text" value={data.title} name="organization" id="organization" placeholder="Your organization" className={st.input} />
   
             <div className={st.committe}>
               <label>Your Committe</label>

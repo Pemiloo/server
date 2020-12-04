@@ -57,15 +57,13 @@ const EndSection = ({data}) => {
   );
 }
 
-const Recent = ({daRoom, atMore}) => {
+const Recent = ({load, daRoom, atMore}) => {  
 
-  const router = useRouter();
-
-  const atDelete = async (room = "") => {
-    console.log(room);
-    await deleteRoom(room);
-    // router.reload();
-  }
+  // const atDelete = async (room = "") => {
+  //   console.log(room);
+  //   await deleteRoom(room);
+  //   load();
+  // }
 
   return(
     <div className={`${s.column} ${s.recentRoom}`}>  
@@ -80,7 +78,7 @@ const Recent = ({daRoom, atMore}) => {
               <div className={`${s.column} ${s.room} ${s.column3}`} key={i} >
                 <div className={`${s.headtxt}`}>
                   <span>{e.nama}</span>
-                      <img onClick={()=>{atDelete(e.codeRoom)}} src="/icon/close.svg" height="25px" />
+                      <img src="/icon/close.svg" height="25px" />
                   </div>
                 <div className={s.row}>
                   <span className={s.txt}>
@@ -124,7 +122,7 @@ const Desc = ({datRoom, email}) => {
   const atChangeFileForm = (file) => {        
     setStaForm(false);      
     const op = uploadFileXl(file, datRoom.codeRoom);
-    fetch('http://34.101.95.115/v1/anggota/uploads', op)
+    fetch('http://34.101.140.233/v1/anggota/uploads', op)
     .then(res => res.json())
     .then(res => {
       setStaForm(true);
@@ -331,6 +329,8 @@ const dataGrap = {
 
 const Dashboard = React.memo(({parMail, daRoom}) => {
 
+  const router = useRouter();
+
   const Cont = useContext(StatePatch);
 
   const Stat = Cont.state;
@@ -338,7 +338,10 @@ const Dashboard = React.memo(({parMail, daRoom}) => {
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
-  console.log(daRoom);
+  //console.log(daRoom);
+  const load = () => {
+    router.push(`/page/${parMail}/dashboard`);
+  }
 
   const [index, setIndex] = useState(0);    
 
@@ -440,7 +443,7 @@ const Dashboard = React.memo(({parMail, daRoom}) => {
             </div> */}
             {(daRoom[index] === undefined ) ? null : <Desc datRoom={daRoom[index]} email={parMail} ></Desc>}              
   
-            {(daRoom.length === 0 || daRoom === undefined) ? null : <Recent daRoom={daRoom} atMore={atMore}></Recent>}
+            {(daRoom.length === 0 || daRoom === undefined) ? null : <Recent load={load} daRoom={daRoom} atMore={atMore}></Recent>}
   
           </main>
   

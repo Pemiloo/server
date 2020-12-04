@@ -26,7 +26,7 @@ const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
         data.map((e,i)=>{
           return(
             <div className={s.candidate} key={i} onClick={()=>{onClick(e.id)}}>
-              <div className={s.row}>
+              <div className={s.flex}>
                 <img src={e.photo} alt={"Photo"}/>
                 <div className={s.column}>
                   <span className={s.txt}>{e.name}</span>
@@ -201,9 +201,14 @@ const Desc = ({datRoom, email}) => {
 
           <div className={s.btnCon}>
             <div className={s.wrapFile}>
-              <label>Participant</label><br></br>
+              <label>Participant</label><br/><br/>
               {
-                (staForm) ? <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }}/> : <span>Loading..</span>
+                (staForm) ? 
+                <>
+                  <label for="upload" className={`${s.expand} ${s.subheadtxt}`}> Upload file </label>
+                  <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }} id={'upload'} className={`${s.subheadtxt}`}/> 
+                </>
+                : <span>Loading..</span>
               }              
             </div>
             <button className={s.btnLogout} onClick={atLogOut} >Logout</button>
@@ -338,7 +343,7 @@ const Dashboard = React.memo(({parMail, daRoom}) => {
   const [room, setRoom] = useState("");  
   const [mail, setMail] = useState(parMail);  
 
-  console.log(daRoom);
+  // console.log(daRoom);
 
   const [index, setIndex] = useState(0);    
 

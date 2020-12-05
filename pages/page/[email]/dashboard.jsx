@@ -267,6 +267,8 @@ export async function getServerSideProps(context){
 
 const Grap = ({room}) => {
 
+  const router = useRouter();
+
   const Cont = useContext(StatePatch);
 
   const [listName, setListName] = useState([]);
@@ -298,9 +300,10 @@ const Grap = ({room}) => {
   
   useEffect(()=>{
     eng.on("getVote",async ()=>{
-      console.log("Kena");
+      //console.log("Kena");
       //mutate(`/api/CandidateSection/${room[0].codeRoom}/${Stat.pos}`);
-      await atAddGraph();
+      //await atAddGraph();
+      router.reload();
     });
   },[]);
 

@@ -211,7 +211,7 @@ const Desc = ({datRoom, email}) => {
               {
                 (staForm) ? 
                 <>
-                  <label for="upload" className={`${s.expand} ${s.subheadtxt}`}> Upload file </label>
+                  <label htmlFor="upload" className={`${s.expand} ${s.subheadtxt}`}> Upload file </label>
                   <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }} id={'upload'} className={`${s.subheadtxt}`}/> 
                 </>
                 : <span>Loading..</span>
@@ -286,10 +286,8 @@ const Grap = ({room}) => {
 
   const atAddGraph = async () => {
     if(listCandidate.data != undefined){              
-      if(listData.length > 0 || listName.length > 0)  {
-        setListName([]);
-        setListData([]);        
-      }
+      setListName([]);
+      setListData([]);              
       for(let i=0;i<listCandidate.data.length;i++){
         setListName(listName => [...listName, listCandidate.data[i].name]);        
         const tmpLen = await getLen(room[0].codeRoom, listCandidate.data[i].id);                
@@ -298,13 +296,13 @@ const Grap = ({room}) => {
     }
   }
   
-  // useEffect(()=>{
-  //   eng.on("getVote",async ()=>{
-  //     console.log("Kena");
-  //     //mutate(`/api/CandidateSection/${room[0].codeRoom}/${Stat.pos}`);
-  //     //await atAddGraph();
-  //   });
-  // },[]);
+  useEffect(()=>{
+    eng.on("getVote",async ()=>{
+      console.log("Kena");
+      //mutate(`/api/CandidateSection/${room[0].codeRoom}/${Stat.pos}`);
+      await atAddGraph();
+    });
+  },[]);
 
   useEffect(()=>{    
     (async ()=>{

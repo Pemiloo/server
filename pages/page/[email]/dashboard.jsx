@@ -7,13 +7,16 @@ import CreateRoom from '../../components/create-room';
 
 import {Line } from 'react-chartjs-2';
 import {useRouter} from 'next/router';
-import {StatePatch, Action} from '../../../lib';
+import {StatePatch, Action, generateGraph, Socket} from '../../../lib';
 import React, {useEffect, useState, useContext} from 'react';
-import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate, deleteRoom } from '../../../api';
+import {getCountAnggota, getCountRoom, getCountRoomSta, getListRoom, getOption, getCandidate, deleteRoom, getLen } from '../../../api';
 import { uploadFileXl } from '../../../lib';
 import { delAll } from '../../../lib';
 
-const {EDITROOM} = Action;
+const {EDITROOM, CHANGEPOS} = Action;
+
+const soc = new Socket();
+const eng = soc.con("http://34.101.140.233:3400");
 
 const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
 
@@ -111,6 +114,11 @@ const Desc = ({datRoom, email}) => {
 
   const { data } = useSWR('/api/option', ()=>{ return getOption('position') });
 
+  const atChangePos = (value = "Ketua") => {
+    setOp(value);  
+    Disp({tipe:CHANGEPOS, payload:{pos:value}});
+  }
+
   const atAddCandidate = () => {
     router.push(`/page/${email}/${datRoom.codeRoom}/room-candidate`);
   }
@@ -169,7 +177,7 @@ const Desc = ({datRoom, email}) => {
             <div className={s.subheadtxt}>
               <span>Candidate</span>
             </div>
-            <select onChange={(e)=>{setOp(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
+            <select onChange={(e)=>{atChangePos(e.target.value)}} name={"position"} id={"position"} className={`${s.select} ${s.txt}`}>
               <option value="" disabled hidden>Position...</option>
               {
                 ((data != undefined) ? data : []).map((e,i)=>{
@@ -249,83 +257,75 @@ export async function getServerSideProps(context){
   }
 }
 
-const generateData = () => {
-  return Math.round(Math.random() * 100);
-}
+// const listName = [];
+// const listData = [];
 
-const dataGrap = {
-  labels: [['June', '2015'], 'July', 'August', 'September', 'October', 'November', 'December', ['January', '2016'], 'February', 'March', 'April', 'May'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      fill: false,
-      lineTension: 0.3,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-          generateData(),
-      ]
-    },
-    {
-      label: 'My Second dataset',
-      fill: false,
-      lineTension: 0.3,
-      backgroundColor: 'rgb(192,75,186)',
-      borderColor: 'rgb(171,75,192)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgb(180,75,192)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-        generateData(),
-      ]
+const Grap = ({room}) => {
+
+  const Cont = useContext(StatePatch);
+
+  const [listName, setListName] = useState([]);
+  const [listData, setListData] = useState([]);
+
+  // const [dataGraph, setDataGraph] = useState({});
+
+  const Stat = Cont.state;  
+
+  //console.log(room);
+
+  //console.log(Stat);
+
+  const listCandidate = useSWR(`/api/CandidateSection/${room[0].codeRoom}/${Stat.pos}`, ()=>{ return getCandidate(room[0].codeRoom, Stat.pos) });
+
+  //console.log(listCandidate.data);    
+
+  const atAddGraph = async () => {
+    if(listCandidate.data != undefined){              
+      if(listData.length > 0 || listName.length > 0)  {
+        setListName([]);
+        setListData([]);        
+      }
+      for(let i=0;i<listCandidate.data.length;i++){
+        setListName(listName => [...listName, listCandidate.data[i].name]);        
+        const tmpLen = await getLen(room[0].codeRoom, listCandidate.data[i].id);                
+        setListData(listData => [...listData, tmpLen]);
+      }            
     }
-  ]
-};
+  }
+  
+  // useEffect(()=>{
+  //   eng.on("getVote",async ()=>{
+  //     console.log("Kena");
+  //     //mutate(`/api/CandidateSection/${room[0].codeRoom}/${Stat.pos}`);
+  //     //await atAddGraph();
+  //   });
+  // },[]);
+
+  useEffect(()=>{    
+    (async ()=>{
+      await atAddGraph();
+    })();
+  },[listCandidate.data]);  
+
+  // console.log(listName);
+  // console.log(listData);    
+
+  if(listCandidate.data != undefined && listName.length != 0){
+    //console.log(listName);
+    return(
+      <div className={s.graphRoom}>      
+        <Line data={generateGraph(listName, listData)} />
+      </div>
+    );
+  }
+  else{
+    return(
+      <div className={s.graphRoom}>      
+        <Line data={{}} />
+      </div>
+    );
+  }
+}
 
 const Dashboard = React.memo(({parMail, daRoom}) => {
 
@@ -429,10 +429,9 @@ const Dashboard = React.memo(({parMail, daRoom}) => {
               </div>
   
             {/* {`graph room while running`} */}
-              <div className={s.graphRoom}>
-                {/* split code graph */}
-                <Line data={dataGrap} />
-              </div>
+            {
+              (daRoom.length === 0 || daRoom === undefined) ? null : <Grap room={daRoom}></Grap>
+            }            
   
             </div>
   

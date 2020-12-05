@@ -6,7 +6,7 @@ export async function getListCandidate(room = ""){
   return await http.post('/getAllCandidate', {room__id:room});
 }
 
-export async function getCandidate(room = "", position = ""){
+export async function getCandidate(room = "", position = "Ketua"){
   return await http.post('/getAllCandidate', {room__id:room, position});
 }
 

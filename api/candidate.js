@@ -1,6 +1,6 @@
 import { Http } from '../lib'
 
-const http = new Http('http://34.101.140.233/v1/candidate');
+const http = new Http('http://34.101.95.115/v1/candidate');
 
 export async function getListCandidate(room = ""){
   return await http.post('/getAllCandidate', {room__id:room});

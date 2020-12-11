@@ -16,7 +16,7 @@ import { delAll } from '../../../lib';
 const {EDITROOM, CHANGEPOS} = Action;
 
 const soc = new Socket();
-const eng = soc.con("https://pemilo.id:3400");
+const eng = soc.con("http://34.101.95.115:3400");
 
 const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
 

@@ -4,7 +4,7 @@ import st from '../../../../../styles/page/room-candidate.module.css';
 import Nav from '../../../../components/nav';
 
 import { uploadFile } from '../../../../../lib';
-import { addCandidate, getCandidateId, updateCandidate } from '../../../../../api';
+import { addCandidate, getCandidateId, updateCandidate,getOption } from '../../../../../api';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
@@ -22,6 +22,7 @@ export function getServerSideProps(context){
 const editCandidate = ({room, email, idCandidate}) => {
 
   const {data} = useSWR(`/api/get/candidate/${idCandidate}`, ()=>{return getCandidateId(idCandidate)});
+  const option = useSWR('/api/option', ()=>{ return getOption('UNDIKNAS') });
 
   const router = useRouter();
 
@@ -113,7 +114,7 @@ const editCandidate = ({room, email, idCandidate}) => {
   }
 
   const atSave = async () => {        
-    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && (newPosition === "Ketua" || newPosition === "Wakil Ketua") && newClass != ""){      
+    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && newClass != ""){      
       const res = await updateCandidate(data[0].id, room, newName, linkPhoto, newVisi, newMisi, newPosition);
       if(res === true){
         alert("Berhasil");
@@ -166,7 +167,15 @@ const editCandidate = ({room, email, idCandidate}) => {
                 </div>
                 <div className={st.box}>
                   <label>Position</label><br />
-                  <input onChange={(e)=>{setPosition(e.target.value)}} defaultValue={newPosition} type="text" name="position" id="position" className={st.input} />
+                  <select onChange={(e)=>{setPosition(e.target.value)}} name={"position"} id={"position"} className={st.input} defaultValue={newPosition}>
+                    {
+                      ((option.data != undefined) ? option.data : []).map((e,i)=>{
+                        return(
+                          <option key={i} value={e}>{e}</option>                    
+                        )
+                      })
+                    }
+                  </select>
                 </div>
               </div>
                   

@@ -16,9 +16,9 @@ import { delAll } from '../../../lib';
 const {EDITROOM, CHANGEPOS} = Action;
 
 const soc = new Socket();
-const eng = soc.con("http://34.101.95.115:3400");
+const eng = soc.con("https://pemilo.id/v1/vote");
 
-const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
+const CandidateSection = ({onClick ,room, position = "Bagus"}) => {
 
   const {data} = useSWR(`/api/CandidateSection/${room}/${position}`, ()=>{ return getCandidate(room, position) });
 
@@ -109,12 +109,12 @@ const Desc = ({datRoom, email}) => {
 
   const router = useRouter();
 
-  const [op, setOp] = useState("Ketua");  
+  const [op, setOp] = useState("Bagus");  
   const [staForm, setStaForm] = useState(true);
 
-  const { data } = useSWR('/api/option', ()=>{ return getOption('position') });
+  const { data } = useSWR('/api/option', ()=>{ return getOption('UNDIKNAS') });
 
-  const atChangePos = (value = "Ketua") => {
+  const atChangePos = (value = "Bagus") => {
     setOp(value);  
     Disp({tipe:CHANGEPOS, payload:{pos:value}});
   }

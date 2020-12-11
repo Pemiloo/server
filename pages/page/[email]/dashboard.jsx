@@ -16,7 +16,7 @@ import { delAll } from '../../../lib';
 const {EDITROOM, CHANGEPOS} = Action;
 
 const soc = new Socket();
-const eng = soc.con("http://34.101.95.115:3400");
+const eng = soc.con("https://pemilo.id:3400");
 
 const CandidateSection = ({onClick ,room, position = "Ketua"}) => {
 
@@ -130,7 +130,7 @@ const Desc = ({datRoom, email}) => {
   const atChangeFileForm = (file) => {        
     setStaForm(false);      
     const op = uploadFileXl(file, datRoom.codeRoom);
-    fetch('http://34.101.95.115/v1/anggota/uploads', op)
+    fetch('https://pemilo.id/v1/anggota/uploads', op)
     .then(res => res.json())
     .then(res => {
       setStaForm(true);

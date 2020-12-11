@@ -59,7 +59,7 @@ const roomCandidate = ({room, email}) => {
   }
 
   const atSave = async () => {    
-    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && (newPosition === "Ketua" || newPosition === "Wakil Ketua") && newClass != ""){
+    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && newPosition != "" && newClass != ""){
       const res = await addCandidate(room, newName, linkPhoto, newVisi, newMisi, newPosition, newClass);
      if(res === true){
       alert("Berhasil");
@@ -106,7 +106,7 @@ const roomCandidate = ({room, email}) => {
     
             <div className={st.flexForm1}>
               <div className={st.box}>
-                <label>Class</label><br />
+                <label>Candidate Number</label><br />
                 <input onChange={(e)=>{setClass(e.target.value)}} value={newClass} type="text" name="class" id="class" className={st.input} />
               </div>
               <div className={st.box}>
@@ -116,12 +116,12 @@ const roomCandidate = ({room, email}) => {
             </div>
                 
             <div className={st.vision}>
-              <label>Visi</label>
+              <label>Motivation</label>
               <textarea onChange={(e)=>{setNewVisi(e.target.value)}} value={newVisi} name="vision" rows="5" className={st.textarea} ></textarea>
             </div>
 
             <div className={st.mision}>
-              <label>Misi</label>
+              <label>Biodata</label>
               {
                 newMisi.map((e, i)=>{
                   return (

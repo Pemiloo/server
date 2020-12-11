@@ -2,7 +2,9 @@ import { createRoom, getCountAnggota, getCountRoom, getCountRoomSta, getListRoom
 import { getListCandidate, addCandidate, getCandidate, getCandidateId, updateCandidate } from './api/candidate';
 import { signinAdmin, signupAdmin, getAdmin, updateAdminPass, updateAdmin } from './api/admin';
 import { getOption } from './api/option';
+import { getLen } from './api/vote';
 
+export {getLen};
 export {getOption};
 export {getListCandidate, addCandidate, getCandidate, getCandidateId, updateCandidate};
 export {signinAdmin, signupAdmin, getAdmin, updateAdminPass, updateAdmin};

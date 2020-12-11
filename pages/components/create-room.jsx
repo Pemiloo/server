@@ -31,7 +31,7 @@ const CreateRoom = ({email}) => {
       if(res) {        
         alert("Berhasil");
         // const op = uploadFileXl(formData, res);
-        // fetch('http://34.101.140.233/v1/anggota/upload', op)
+        // fetch('https://pemilo.id/v1/anggota/upload', op)
         // .then(res => res.json())
         // .then(res => {
         //   console.log(res)

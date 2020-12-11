@@ -1,7 +1,7 @@
 import { Http } from '../lib';
 
-const httpA = new Http('http://34.101.140.233/v1/anggota');
-const httpR = new Http('http://34.101.140.233/v1/room');
+const httpA = new Http('http://34.101.95.115/v1/anggota');
+const httpR = new Http('http://34.101.95.115/v1/room');
 
 export async function createRoom(emailAdmin = "", name = "", desc = "", pass = ""){
   const obj = (pass === null) ? {emailAdmin,nama:name,deskripsi:desc} : {emailAdmin,nama:name,deskripsi:desc,password : pass};

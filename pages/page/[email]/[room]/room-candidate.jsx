@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react';
 import Head from 'next/head';
 import st from '../../../../styles/page/room-candidate.module.css';
 import Nav from '../../../components/nav';
+import useSWR from 'swr';
 
 import { uploadFile } from '../../../../lib';
-import { addCandidate } from '../../../../api';
+import { addCandidate,getOption } from '../../../../api';
 import { useRouter } from 'next/router';
 
 export function getServerSideProps(context){
@@ -18,6 +19,8 @@ export function getServerSideProps(context){
 }
 
 const roomCandidate = ({room, email}) => {
+
+  const { data } = useSWR('/api/option', ()=>{ return getOption('UNDIKNAS') });
 
   const router = useRouter();
 
@@ -59,7 +62,7 @@ const roomCandidate = ({room, email}) => {
   }
 
   const atSave = async () => {    
-    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && newPosition != "" && newClass != ""){
+    if(newName != "" && linkPhoto != "" && newMisi.length != 0 && newPosition != 0 && newClass != ""){
       const res = await addCandidate(room, newName, linkPhoto, newVisi, newMisi, newPosition, newClass);
      if(res === true){
       alert("Berhasil");
@@ -111,7 +114,16 @@ const roomCandidate = ({room, email}) => {
               </div>
               <div className={st.box}>
                 <label>Position</label><br />
-                <input onChange={(e)=>{setPosition(e.target.value)}} value={newPosition} type="text" name="position" id="position" className={st.input} />
+                <select onChange={(e)=>{setPosition(e.target.value)}} name={"position"} id={"position"} className={st.input} defaultValue="0">
+                  <option value="0" disabled hidden>Position...</option>
+                  {
+                    ((data != undefined) ? data : []).map((e,i)=>{
+                      return(
+                        <option key={i} value={e}>{e}</option>                    
+                      )
+                    })
+                  }
+                </select>
               </div>
             </div>
                 

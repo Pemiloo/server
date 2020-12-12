@@ -111,6 +111,24 @@ textarea.textarea{
   background-color: #6EADE8;
 }
 
+.submitCandidate > .btnDel{
+  margin-left: 10px;
+  border: 2px solid #D75050;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px 25px;
+  width: 100px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #D75050;
+  outline: none;
+} .btnDel:hover{
+  background-color: #D75050;
+    color: #F4F4F4;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 900px){
   .containerFluid{padding: 65px 30px 0;}
   .column{

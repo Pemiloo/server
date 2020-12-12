@@ -4,7 +4,7 @@ import st from '../../../../../styles/page/room-candidate.module.css';
 import Nav from '../../../../components/nav';
 
 import { uploadFile } from '../../../../../lib';
-import { addCandidate, getCandidateId, updateCandidate,getOption } from '../../../../../api';
+import { getCandidateId, updateCandidate,getOption, deleteCandidate } from '../../../../../api';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
@@ -128,6 +128,16 @@ const editCandidate = ({room, email, idCandidate}) => {
     }
   }
 
+  const atDel = async () => {
+    const res = await deleteCandidate(data[0].id);
+    if(res === true){
+      alert("Berhasil di delete");
+      router.push(`/page/${email}/dashboard`);
+    }else{
+      alert("Gagal");
+    }
+  }
+
   if(data != undefined){
     return(
       <> 
@@ -202,6 +212,7 @@ const editCandidate = ({room, email, idCandidate}) => {
   
               <div className={st.submitCandidate}>
                 <button onClick={atSave} className={st.Btn}>Save (+)</button>
+                <button onClick={atDel} className={st.btnDel}>Delete</button>
               </div>
             </div>
   

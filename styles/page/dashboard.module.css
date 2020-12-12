@@ -244,12 +244,7 @@ button.expand, .wrapFile .expand{
 }.wrapFile .expand:hover{box-shadow: inset 0 0 100px #00000010;}
 
 .wrapFile input{
-  margin-top: 10px;
-  position: absolute;
-  z-index: 1;
-  top: 21px;
-  left: 7px;
-  outline: none;
+  display: none;
 }
 
 @media screen and (max-width : 1400px){ /*responsive selector*/
@@ -259,7 +254,6 @@ button.expand, .wrapFile .expand{
   .txt{font-size: small; font-weight: 400;}
   .detailRoom{ margin-bottom: 19px;}
   select.select{width: 50%;}
-  .wrapFile input{left: 17px;}
 }
 @media screen and (max-width: 900px){
   .containerFluid{padding: 65px 30px 0;}

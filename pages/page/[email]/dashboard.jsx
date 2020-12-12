@@ -212,7 +212,7 @@ const Desc = ({datRoom, email}) => {
                 (staForm) ? 
                 <>
                   <label htmlFor="upload" className={`${s.expand} ${s.subheadtxt}`}> Upload file </label>
-                  <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }} id={'upload'} className={`${s.subheadtxt}`}/> 
+                  <input type="file" onChange={(e)=>{ atChangeFileForm(e.target.files[0]) }} id={'upload'}/> 
                 </>
                 : <span>Loading..</span>
               }              

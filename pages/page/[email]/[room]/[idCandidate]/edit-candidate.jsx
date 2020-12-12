@@ -115,7 +115,7 @@ const editCandidate = ({room, email, idCandidate}) => {
 
   const atSave = async () => {        
     if(newName != "" && linkPhoto != "" && newMisi.length != 0 && newClass != ""){      
-      const res = await updateCandidate(data[0].id, room, newName, linkPhoto, newVisi, newMisi, newPosition);
+      const res = await updateCandidate(data[0].id, room, newName, linkPhoto, newVisi, newMisi, newPosition, newClass);
       if(res === true){
         alert("Berhasil");
         router.push(`/page/${email}/dashboard`);

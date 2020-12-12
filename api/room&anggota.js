@@ -27,7 +27,7 @@ export async function getCountRoomSta(email = "", sta = true){
 }
 
 export async function getListRoom(email = ""){      
-  console.log(`${email} GetListRoom`);
+  // console.log(`${email} GetListRoom`);
   const res = await httpR.post('/findAll', {param : {emailAdmin:email}});
   return res;
 }
@@ -39,7 +39,7 @@ export async function updateRoom(room = "", update = new Object()){
 
 export async function deleteRoom(room = ""){
   const res = await httpR.delete(`/delete`, {param:{codeRoom:room}});
-  console.log(res);
+  // console.log(res);
   return res;
 }
 

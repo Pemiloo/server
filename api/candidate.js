@@ -24,3 +24,8 @@ export async function updateCandidate(id = "",room = "",name = "",photo = "", vi
   const res = await http.put('/Candidate', {id, codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position, classroom:kelas});
   return (res.status === 'ok') ? true : false;
 }
+
+export async function deleteCandidate(id = ""){
+  const res = await http.delete('/Candidate', {id});
+  return (res.status === 'OK') ? true : false;
+}

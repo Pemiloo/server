@@ -15,7 +15,7 @@ const Auth = () => {
   const Stat = Cont.state;
   const Disp = Cont.dispatch;    
 
-  console.log(Stat);
+  // console.log(Stat);
 
   const atClickLogin = () => {    
     Disp({tipe:LOGIN});    

@@ -50,7 +50,7 @@ const nextRegister = () => {
     fetch('https://api.cloudinary.com/v1_1/kotakjualan/image/upload', res)
     .then(res => res.json())
     .then(res => {
-      console.log(res)
+      // console.log(res)
       setStaPhoto(true);
       setPhoto(res.secure_url);
       setAlt(`An image of ${res.original_filename}`);

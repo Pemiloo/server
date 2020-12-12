@@ -162,7 +162,7 @@ const editCandidate = ({room, email, idCandidate}) => {
       
               <div className={st.flexForm1}>
                 <div className={st.box}>
-                  <label>Class</label><br />
+                  <label>Candidate Number</label><br />
                   <input onChange={(e)=>{setClass(e.target.value)}} defaultValue={newClass} type="text" name="class" id="class" className={st.input} />
                 </div>
                 <div className={st.box}>
@@ -180,12 +180,12 @@ const editCandidate = ({room, email, idCandidate}) => {
               </div>
                   
               <div className={st.vision}>
-                <label>Visi</label>
+                <label>Motivation</label>
                 <textarea onChange={(e)=>{setNewVisi(e.target.value)}} defaultValue={newVisi} name="vision" rows="5" className={st.textarea} ></textarea>
               </div>
   
               <div className={st.mision}>
-                <label>Misi</label>
+                <label>Biodata</label>
                 {
                   newMisi.map((e, i)=>{
                     console.log(e);

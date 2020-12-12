@@ -20,7 +20,7 @@ export async function addCandidate(room = "", name = "", photo = "", visi = "", 
   return (res.status === 'ok') ? true : false;
 }
 
-export async function updateCandidate(id = "",room = "",name = "",photo = "", visi = "", misi = [], position = ""){
-  const res = await http.put('/Candidate', {id, codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position});
+export async function updateCandidate(id = "",room = "",name = "",photo = "", visi = "", misi = [], position = "", kelas = ""){
+  const res = await http.put('/Candidate', {id, codeRoom:room, candidateName:name, linkPhoto:photo, visi, mission:misi, position, classroom:kelas});
   return (res.status === 'ok') ? true : false;
 }

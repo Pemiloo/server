@@ -28,7 +28,7 @@ const editCandidate = ({room, email, idCandidate}) => {
 
   const refFile = useRef(null);  
 
-  console.log(data);
+  // console.log(data);
 
   const funcVal = (id = 0) => {
     if(data != undefined){
@@ -129,12 +129,12 @@ const editCandidate = ({room, email, idCandidate}) => {
   }
 
   const atDel = async () => {
-    console.log(idCandidate);
+    // console.log(idCandidate);
     const res = await deleteCandidate(idCandidate);
-    console.log(res)
+    // console.log(res)
     if(res === true){
       alert("Berhasil di delete");
-      //router.push(`/page/${email}/dashboard`);
+      router.push(`/page/${email}/dashboard`);
     }else{
       alert("Gagal");
     }

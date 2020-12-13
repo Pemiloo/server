@@ -27,5 +27,5 @@ export async function updateCandidate(id = "",room = "",name = "",photo = "", vi
 
 export async function deleteCandidate(id = ""){
   const res = await http.delete('/Candidate', {id});
-  return (res.status === 'OK') ? true : false;
+  return (res.status === 'ok') ? true : false;
 }

@@ -131,6 +131,7 @@ const editCandidate = ({room, email, idCandidate}) => {
   const atDel = async () => {
     console.log(idCandidate);
     const res = await deleteCandidate(idCandidate);
+    console.log(res)
     if(res === true){
       alert("Berhasil di delete");
       //router.push(`/page/${email}/dashboard`);

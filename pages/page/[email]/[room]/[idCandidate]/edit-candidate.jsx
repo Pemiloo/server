@@ -129,10 +129,11 @@ const editCandidate = ({room, email, idCandidate}) => {
   }
 
   const atDel = async () => {
-    const res = await deleteCandidate(data[0].id);
+    console.log(idCandidate);
+    const res = await deleteCandidate(idCandidate);
     if(res === true){
       alert("Berhasil di delete");
-      router.push(`/page/${email}/dashboard`);
+      //router.push(`/page/${email}/dashboard`);
     }else{
       alert("Gagal");
     }

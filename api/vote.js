@@ -1,6 +1,6 @@
 import { Http } from "../lib";
 
-const http = new Http('https://pemilo.id/v1/vote');
+const http = new Http('https://pemilo.id/v1/votes');
 
 export async function getLen(room = "", id = ""){
   const data = await http.post("/total", {codeRoom:room, idCandidate:id});

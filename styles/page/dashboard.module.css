@@ -202,7 +202,9 @@ select.select{
 }
 
 .column3{
-  margin: 6px;
+  margin-right: 6px;
+}.column3:last-child{
+  margin-right: 0;
 }
 
 button.expand, .wrapFile .expand{

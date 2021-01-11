@@ -31,6 +31,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Mockup
 
-(https://res.cloudinary.com/dl3spjhwz/image/upload/v1610334761/Screenshot_2020-10-27_161433_mqssud.jpg)
+![alt text](https://res.cloudinary.com/dl3spjhwz/image/upload/v1610334761/Screenshot_2020-10-27_161433_mqssud.jpg)
 
-(https://res.cloudinary.com/dl3spjhwz/image/upload/v1610334762/Screenshot_2020-10-27_161508_znxjra.jpg)
+![alt text](https://res.cloudinary.com/dl3spjhwz/image/upload/v1610334762/Screenshot_2020-10-27_161508_znxjra.jpg)
